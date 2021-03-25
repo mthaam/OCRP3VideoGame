@@ -7,7 +7,8 @@
 
 import Foundation
 
-class Game {
-    
+func launchGame() {
     
 }
+
+
