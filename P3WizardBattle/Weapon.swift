@@ -41,4 +41,8 @@ class Weapon {
 //    
 //    }
     
+//    func chooseWeaponForCharater() {
+//        
+//    }
+    
 }

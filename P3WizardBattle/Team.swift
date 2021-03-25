@@ -8,15 +8,15 @@
 import Foundation
 
 class Team {
-    var player: Player
+//    var player: Player
     
     var team = [Character]()
     
     
 
-    init(newTeam: [Character], newPlayer: Player) {
+    init(newTeam: [Character]) {
         self.team = newTeam
-        self.player = newPlayer
+//        self.player = newPlayer
     }
     
     static func displayCharacterSet(ofCharacters: [Character]) {
@@ -68,7 +68,7 @@ class Team {
             
         } while newCharacterSet.count < 3
         
-        let team = Team(newTeam: newCharacterSet, newPlayer: player)
+        let team = Team(newTeam: newCharacterSet)
         
         return team
     }

@@ -34,5 +34,19 @@ class UserFunctions {
         return rawValue!
     }
     
+    static func askName() -> String {
+        var name: String = ""
+        repeat{
+            print("Veuillez entrer votre nom")
+            name = UserFunctions.answerWithText()
+            if name.count < 3 {
+                print("Votre nom doit comporter au moins 3 caractères")
+            }
+        } while name.count < 3
+        return name
+    }
+
+    
+    
     
 }
