@@ -9,6 +9,9 @@ import Foundation
 
 func launchGame() {
     
+    print("Bienvenue dans Wizard Battle!")
+    
 }
 
 
+launchGame()
