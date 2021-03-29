@@ -26,7 +26,7 @@ class Character {
     }
     
     
-    static func createCharacterSet() -> [Character] {
+    static func displayAvailableCharacters() -> [Character] {
         let blankWeapon = Weapon(newWeaponType: "blank", newWeaponDamagePower: 0)
         
         let warrior = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Guerrier")
