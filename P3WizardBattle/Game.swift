@@ -13,11 +13,30 @@ enum PlayerTurn {
 
 class Game {
     
-    var characterSet: [Character] = Character.createCharacterSet()
-    //var team = Team(newTeam: <#T##[Character]#>)
+
+    func launchGame() {
+        
+        print("Welcome to Wizard Battle!")
+        print("Please enter names for players")
+        
+        
+        var playerArray: [Player] = Player.createPlayerArray()
+        
+
+
+       
+        
+    }
     
     
     
+    
+    
+    
+    
+    
+    
+
     
 
     

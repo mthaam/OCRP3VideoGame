@@ -20,4 +20,24 @@ class Player {
         self.playerScore = newPlayerScore
     }
     
+    
+    static func createPlayerArray() -> [Player] {
+        var playerArray: [Player] = []
+        repeat {
+            for count in 1...2 {
+                print("Now enter name for player \(count) and press Enter")
+                playerArray.append(Player(newPlayerName: UserFunctions.askNameForPlayer()))
+            }
+
+        } while playerArray.count < 2
+        
+        for _ in playerArray {
+            if playerArray.first?.playerName == playerArray.last?.playerName {
+                print("Players have identical names. Please change name for Player 2")
+                playerArray.last?.playerName = UserFunctions.askNameForPlayer()
+            }
+        }
+        return playerArray
+    }
+    
 }
