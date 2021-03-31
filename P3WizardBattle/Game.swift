@@ -26,20 +26,19 @@ class Game {
         print("Each player can choose 3 characters for his team")
         
         
-        
-        
-        
-        
-        
         var team: [Team] = []
         
         for player in playerArray {
             
             print("\n\nPlease choose characters for player \(player.playerName)")
             let availableCharacters: [Character] = Character.displayAvailableCharacters()
-            var selectedCharacters: [Character] = []
+            var selectedCharacters: [Character] = Team.chooseCharactersForPlayersTeam(in: availableCharacters)
             
-            selectedCharacters = Team.chooseCharactersForPlayersTeam(in: availableCharacters)
+            print("\n\(player.playerName), Your team now has the following characters")
+            for character in selectedCharacters {
+                print(" \(character.characterName) the \(character.characterType)")
+            }
+            
             
         }
        

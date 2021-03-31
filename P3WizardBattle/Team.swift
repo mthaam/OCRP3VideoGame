@@ -8,52 +8,25 @@
 import Foundation
 
 class Team {
-//    var player: Player
     
     var team = [Character]()
-    
-    
 
     init(newTeam: [Character]) {
         self.team = newTeam
-//        self.player = newPlayer
     }
     
-    static func displayCharacterSet(ofCharacters: [Character]) {
-        let characterSet: [Character] = ofCharacters
-        print("Veuillez choisir 3 personnages parmis les suivants")
-        
-        for character in characterSet {
-            print("Nom: \(character.characterType) ")
-        }
-        
-    }
-    
-//    static func chooseNamesForTeamsCharacters(withPlayersTeam team: Team) -> Team {
-//        let playersTeam = team
-//        var characterName: String?
-//
-//        repeat {
-//
-//        } while
-//
-//
-//    }
     
     static func chooseCharactersForPlayersTeam(in availCharacters: [Character]) -> [Character] {
         
         let characterSet = availCharacters
         var newCharacterSet: [Character] = []
         
-        
-        
-        
         var counter: Int = 0
         repeat {
             var userChoice: Int = 0
             
             counter += 1
-            print("\nPlease choose character \(counter)")
+            print("\nPlease choose character \(counter) and press Enter")
 
             repeat {
                 userChoice = UserFunctions.setChoice()
@@ -81,34 +54,46 @@ class Team {
 
         } while newCharacterSet.count < 3
         
+        newCharacterSet = chooseNamesForCharacters(withPlayersTeam: newCharacterSet)
+        
         return newCharacterSet
     }
-// REFACTOR WITH;
-//    func appendCharacterSet(<#parameters#>) -> <#return type#> {
-//        <#function body#>
-//    }
     
-// FIND A WAY TO ADD A MESSAGE SAYING PLAYER XXX HERE ARE THE CHARACTERS YOU CHOSE
-    
-     static func askChoice() -> String {
-        print("Bienvenue dans Note Manager"
-                + "\n1. Tapez 1 saisir une note"
-                + "\n2. Tapez 2 calculer une moyenne"
-                + "\n3. Tapez 3 quitter le programme"
-        )
-        print("Que souhaitez vous faire?")
-        var choiceValue: String?
-        repeat {
-            choiceValue = readLine()
-            
-            if choiceValue == nil {
-                print("Une choix doit etre effectue")
-            }
-        } while choiceValue == nil
-        return choiceValue!
+
+    private static func chooseNamesForCharacters(withPlayersTeam array: [Character]) -> [Character] {
+        let playersCharacters = array
+        var newCharacterName: String = ""
+        
+        print("\nPlease choose names for each of your characters")
+        
+        
+
+        for character in playersCharacters {
+            print("Now choose a name for character \(character.characterType)")
+            repeat {
+                newCharacterName = UserFunctions.answerWithText()
+            } while newCharacterName.count < 3
+            character.characterName = newCharacterName
+        }
+        return playersCharacters
     }
 
     
+//    private static func checkIfCharactersNamesAreIdentical(in array: [Character]) -> [Character] {
+//        let playersCharacters = array
+//        var newCharacterName: String = ""
+//        var index = 0
+//
+//        for character in playersCharacters {
+//            index += 1
+//            if character.characterName == playersCharacters[index].characterName {
+//                print("Another character has this name. Please choose another one.")
+//            }
+//        }
+//        return playersCharacters
+//    }
+    
+
 
 
     
