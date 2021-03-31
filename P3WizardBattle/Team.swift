@@ -79,19 +79,23 @@ class Team {
     }
 
     
-//    private static func checkIfCharactersNamesAreIdentical(in array: [Character]) -> [Character] {
-//        let playersCharacters = array
-//        var newCharacterName: String = ""
-//        var index = 0
-//
-//        for character in playersCharacters {
-//            index += 1
-//            if character.characterName == playersCharacters[index].characterName {
-//                print("Another character has this name. Please choose another one.")
-//            }
-//        }
-//        return playersCharacters
-//    }
+    private static func checkIfCharactersNamesAreIdentical(in array: [Character]) -> [Character] {
+        let playersCharacters = array
+        var newCharacterName: String = ""
+        var index = 0
+        
+//        if playersCharacters.elementsEqual(<#T##other: Sequence##Sequence#>, by: { (<#Character#>, <#Sequence.Element#>) -> Bool in
+//            <#code#>
+//        })
+
+        for character in playersCharacters {
+            index += 1
+            if character.characterName == playersCharacters[index].characterName {
+                print("Another character has this name. Please choose another one.")
+            }
+        }
+        return playersCharacters
+    }
     
 
 
