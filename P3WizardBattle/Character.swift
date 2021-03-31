@@ -25,7 +25,6 @@ class Character {
         self.weaponOfCharacter = newWeaponOfCharacter
     }
     
-    
     static func displayAvailableCharacters() -> [Character] {
         let blankWeapon = Weapon(newWeaponType: "blank", newWeaponDamagePower: 0)
         
@@ -35,8 +34,19 @@ class Character {
         let fairy = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Fée")
         let demon = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Démon")
         let elf = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Elfe")
-        return [warrior, knight, wizard, fairy, demon, elf]
+        
+        let characterArray: [Character] = [warrior, knight, wizard, fairy, demon, elf]
+        
+        var counter = 0
+        for character in characterArray {
+            counter += 1
+            print("\nEnter \(counter) for \(character.characterType)")
+        }
+        
+        return characterArray
     }
+    
+    
 
     
     

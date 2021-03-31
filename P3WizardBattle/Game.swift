@@ -17,38 +17,35 @@ class Game {
     func launchGame() {
         
         print("Welcome to Wizard Battle!")
-        print("Please enter names for players")
+        print("\nPlease enter names for players")
         
         
         let playerArray: [Player] = Player.createPlayerArray()
         
-        print("Now please choose a team for each player")
+        print("\nNow please choose a team for each player")
         print("Each player can choose 3 characters for his team")
         
-        print("Please choose characters for player \(playerArray.first!.playerName)")
         
         
         
         
         
+        
+        var team: [Team] = []
         
         for player in playerArray {
-            var team: [Team] = []
-            let availableCharacters = Character.displayAvailableCharacters()
-            for character in availableCharacters {
-                print(character.characterType)
-            }
-            repeat {
-                
-            } while team.count < 3
+            
+            print("\n\nPlease choose characters for player \(player.playerName)")
+            let availableCharacters: [Character] = Character.displayAvailableCharacters()
+            var selectedCharacters: [Character] = []
+            
+            selectedCharacters = Team.chooseCharactersForPlayersTeam(in: availableCharacters)
             
         }
-        
-
-
        
-        
     }
+    
+
     
     
     

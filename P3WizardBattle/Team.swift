@@ -29,50 +29,6 @@ class Team {
         
     }
     
-    
-    static func chooseTeam(forPlayer player: Player, withCharacters character: [Character]) -> Team {
-        
-        let player = player
-        let characterSet = character
-        var newCharacterSet: [Character] = []
-        
-        var userChoice: Int?
-        
-        var counter: Int = 0
-        for charLoop in characterSet {
-            counter += 1
-            print("Entrez \(counter) pour \(charLoop.characterType)")
-        }
-        
-        repeat {
-            repeat {
-                userChoice = UserFunctions.setChoice()
-            } while userChoice == nil // && userChoice < 1 
-            
-            switch userChoice! {
-            case 1:
-                newCharacterSet = chooseCharacterForTeam(with: 6, with: characterSet)
-            case 2:
-                newCharacterSet = chooseCharacterForTeam(with: 6, with: characterSet)
-            case 3:
-                newCharacterSet = chooseCharacterForTeam(with: 6, with: characterSet)
-            case 4:
-                newCharacterSet = chooseCharacterForTeam(with: 6, with: characterSet)
-            case 5:
-                newCharacterSet = chooseCharacterForTeam(with: 6, with: characterSet)
-            case 6:
-                newCharacterSet = chooseCharacterForTeam(with: 6, with: characterSet)
-            default:
-                break
-            }
-            
-        } while newCharacterSet.count < 3
-        
-        let team = Team(newTeam: newCharacterSet)
-        
-        return team
-    }
-    
 //    static func chooseNamesForTeamsCharacters(withPlayersTeam team: Team) -> Team {
 //        let playersTeam = team
 //        var characterName: String?
@@ -84,26 +40,74 @@ class Team {
 //
 //    }
     
-    static private func chooseCharacterForTeam(with userChoice: Int!, with characterSet: [Character]) -> [Character] {
-        let userChoice = userChoice
-        let characterSet = characterSet
+    static func chooseCharactersForPlayersTeam(in availCharacters: [Character]) -> [Character] {
+        
+        let characterSet = availCharacters
         var newCharacterSet: [Character] = []
         
-        if userChoice == 1 {
-            newCharacterSet.append(characterSet[0])
-        } else if userChoice == 2 {
-            newCharacterSet.append(characterSet[1])
-        } else if userChoice == 3 {
-            newCharacterSet.append(characterSet[2])
-        } else if userChoice == 4 {
-            newCharacterSet.append(characterSet[3])
-        } else if userChoice == 5 {
-            newCharacterSet.append(characterSet[4])
-        } else if userChoice == 6 {
-            newCharacterSet.append(characterSet[5])
-        }
+        
+        
+        
+        var counter: Int = 0
+        repeat {
+            var userChoice: Int = 0
+            
+            counter += 1
+            print("\nPlease choose character \(counter)")
+
+            repeat {
+                userChoice = UserFunctions.setChoice()
+                if userChoice < 1 || userChoice > 6 {
+                    print("Your choice is out of range. Please try again with a choice between 1 and 6")
+                }
+            } while userChoice < 1 || userChoice > 6
+
+            switch userChoice {
+            case 1:
+                newCharacterSet.append(characterSet[0])
+            case 2:
+                newCharacterSet.append(characterSet[1])
+            case 3:
+                newCharacterSet.append(characterSet[2])
+            case 4:
+                newCharacterSet.append(characterSet[3])
+            case 5:
+                newCharacterSet.append(characterSet[4])
+            case 6:
+                newCharacterSet.append(characterSet[5])
+            default:
+                break
+            }
+
+        } while newCharacterSet.count < 3
+        
         return newCharacterSet
     }
+// REFACTOR WITH;
+//    func appendCharacterSet(<#parameters#>) -> <#return type#> {
+//        <#function body#>
+//    }
+    
+// FIND A WAY TO ADD A MESSAGE SAYING PLAYER XXX HERE ARE THE CHARACTERS YOU CHOSE
+    
+     static func askChoice() -> String {
+        print("Bienvenue dans Note Manager"
+                + "\n1. Tapez 1 saisir une note"
+                + "\n2. Tapez 2 calculer une moyenne"
+                + "\n3. Tapez 3 quitter le programme"
+        )
+        print("Que souhaitez vous faire?")
+        var choiceValue: String?
+        repeat {
+            choiceValue = readLine()
+            
+            if choiceValue == nil {
+                print("Une choix doit etre effectue")
+            }
+        } while choiceValue == nil
+        return choiceValue!
+    }
+
     
 
 
@@ -111,3 +115,4 @@ class Team {
     
     
 }
+

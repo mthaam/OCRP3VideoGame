@@ -27,7 +27,7 @@ class UserFunctions {
         repeat {
             rawValue = readLine()
             if rawValue == nil {
-                print("Une valeur doit être saisie")
+                print("You didn't type anything. Please try again")
             }
         } while rawValue == nil
         
@@ -39,10 +39,48 @@ class UserFunctions {
         repeat{
             name = UserFunctions.answerWithText()
             if name.count < 3 {
-                print("Votre nom doit comporter au moins 3 caractères")
+                print("Your name must have at least 3 letters")
             }
         } while name.count < 3
         return name
+    }
+    
+    static func chooseMenuOption(message: String, max: Int) -> Int {
+        var userChoice: Int
+        repeat {
+            print(message)
+            userChoice = UserFunctions.answerWithIntNumber()
+        } while userChoice < 1 || userChoice > max
+        return userChoice
+    }
+    
+    
+    static func answerWithIntNumber() -> Int {
+        var readValue: Int?
+        repeat {
+            let rawValue = UserFunctions.answerWithText()
+            if let value = Int(rawValue) {
+                readValue = value
+            } else {
+                print("You can only answer with a number")
+            }
+        } while readValue == nil
+        
+        return readValue!
+    }
+    
+    static func answerWithDblNumber() -> Double {
+        var readValue: Double?
+        repeat {
+            let rawValue = UserFunctions.answerWithText()
+            if let value = Double(rawValue) {
+                readValue = value
+            } else {
+                print("You can only answer with a number")
+            }
+        } while readValue == nil
+        
+        return readValue!
     }
 
     
