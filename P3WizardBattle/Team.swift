@@ -11,14 +11,6 @@ class Team {
     
     var team: [Character]!
         
-        
-//    = [Character]()
-//
-//    init(newTeam: [Character]) {
-//        self.team = newTeam
-//    }
-    
-    
     
     static func chooseCharactersForPlayersTeam() -> Team {
         
@@ -67,72 +59,12 @@ class Team {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    static func chooseCharactersForPlayersTeam() -> [Character] {
-//
-//        let characterSet = Character.displayAvailableCharacters()
-//        var newCharacterSet: [Character] = []
-//
-//        var counter: Int = 0
-//        repeat {
-//            var userChoice: Int = 0
-//
-//            counter += 1
-//            print("\nPlease choose character \(counter) and press Enter")
-//
-//            repeat {
-//                userChoice = UserFunctions.setChoice()
-//                if userChoice < 1 || userChoice > 6 {
-//                    print("Your choice is out of range. Please try again with a choice between 1 and 6")
-//                }
-//            } while userChoice < 1 || userChoice > 6
-//
-//            switch userChoice {
-//            case 1:
-//                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[0], in: newCharacterSet)
-//            case 2:
-//                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[1], in: newCharacterSet)
-//            case 3:
-//                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[2], in: newCharacterSet)
-//            case 4:
-//                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[3], in: newCharacterSet)
-//            case 5:
-//                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[4], in: newCharacterSet)
-//            case 6:
-//                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[5], in: newCharacterSet)
-//            default:
-//                break
-//            }
-//
-//        } while newCharacterSet.count < 3
-//
-//
-//        return newCharacterSet
+//    func checkIfEachCharacterHasNotTheSameName() {
+//        guard <#condition#> else {
+//            <#statements#>
+//        }
 //    }
+
     
     
     
