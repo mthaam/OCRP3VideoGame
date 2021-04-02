@@ -34,7 +34,7 @@ class Game {
             let availableCharacters: [Character] = Character.displayAvailableCharacters()
             var selectedCharacters: [Character] = Team.chooseCharactersForPlayersTeam(in: availableCharacters)
             
-            print("\n\(player.playerName), Your team now has the following characters")
+            print("\nCongratulations \(player.playerName), Your team now has the following characters")
             for character in selectedCharacters {
                 print(" \(character.characterName) the \(character.characterType)")
             }
