@@ -9,7 +9,7 @@ import Foundation
 
 class Character {
     
-    var characterName: String
+    var characterName: String!
     var characterType: String
     
     var lifePoints: Int
@@ -46,8 +46,56 @@ class Character {
         return characterArray
     }
     
+    static func addCharacterAndName(withChoice ofCharacters: Character, in arrayToAppend : [Character]) -> [Character] {
+        var _selectedCharacter: Character = ofCharacters
+        var newArrayForPlayer: [Character] = arrayToAppend
+        
+        _selectedCharacter.characterName = chooseNameForCharacter(with: _selectedCharacter)
+        _selectedCharacter = checkIfNewCharacterNameIsAlreadyUsed(forCharacter: _selectedCharacter, comparedTo: newArrayForPlayer)
+        
+        newArrayForPlayer.append(_selectedCharacter)
+        
+        return newArrayForPlayer
+        
+    }
     
-
+    
+    private static func checkIfNewCharacterNameIsAlreadyUsed(forCharacter: Character, comparedTo: [Character]) -> Character {
+        let newCharacter = forCharacter
+        let existingCharacters = comparedTo
+        
+        repeat {
+            for character in existingCharacters {
+                if newCharacter.characterName == character.characterName {
+                    repeat {
+                        print("The name you chose for \(newCharacter.characterType) is already used. Please choose a new name for your character")
+                        newCharacter.characterName = UserFunctions.answerWithText()
+                    } while newCharacter.characterName == character.characterName
+                }
+            }
+        } while newCharacter.characterName == existingCharacters.first?.characterName
+        
+        
+        return newCharacter
+    }
+    
+    private static func chooseNameForCharacter(with character: Character) -> String {
+        var newCharacterName: String = character.characterName
+        
+        print("\nNow choose a name for character \(character.characterType)")
+        
+        repeat {
+            newCharacterName = UserFunctions.answerWithText()
+            if newCharacterName.count < 3 {
+                print("\nThe name you chose is too short, please choose a name with at least 3 letters")
+            }
+        } while newCharacterName.count < 3
+        
+        return  newCharacterName
+    }
+    
+    
+    
     
     
     
