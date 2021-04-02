@@ -73,11 +73,11 @@
 			children = (
 				86A64C542603E08100B3F184 /* main.swift */,
 				86A64C7526053B5000B3F184 /* Game.swift */,
+				476BF624260964E10058861F /* Player.swift */,
 				86A64C622603E15500B3F184 /* Fight.swift */,
 				86A64C5F2603E12900B3F184 /* Team.swift */,
 				86A64C5C2603E10D00B3F184 /* Character.swift */,
 				86A64C7826053CB200B3F184 /* Weapon.swift */,
-				476BF624260964E10058861F /* Player.swift */,
 				866CCAE4260A026200B5E547 /* UserFunctions.swift */,
 			);
 			path = P3WizardBattle;

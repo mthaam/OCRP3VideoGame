@@ -10,6 +10,9 @@ import Foundation
 class Player {
     var playerName: String
     var playerScore: Int = 0
+    var team: Team!
+    
+    
     
     init(newPlayerName: String) {
         self.playerName = newPlayerName
@@ -40,4 +43,17 @@ class Player {
         return playerArray
     }
     
+    
+    func chooseTeam() {
+        print("\n\nPlease choose characters for player \(playerName.capitalized)")
+        team = Team.chooseCharactersForPlayersTeam()
+        print("\nCongratulations \(playerName.capitalized), Your team now has the following characters")
+        for character in team.team {
+            print(" \(character.characterName!) the \(character.characterType)")
+        }
+        
+        
+    }
+    
+
 }

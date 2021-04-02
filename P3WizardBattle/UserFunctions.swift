@@ -13,14 +13,23 @@ class UserFunctions {
     static func setChoice() -> Int {
         var readValue: Int?
         repeat {
-            let choice = UserFunctions.answerWithText()
-            if let newChoice = Int(choice) {
-                readValue = newChoice
-            }
-            
+            let choice = UserFunctions.answerWithIntNumber()
+            readValue = choice
         } while readValue == nil
         return readValue!
     }
+    
+//    static func setChoice() -> Int {
+//        var readValue: Int?
+//        repeat {
+//            let choice = UserFunctions.answerWithText()
+//            if let newChoice = Int(choice) {
+//                readValue = newChoice
+//            }
+//
+//        } while readValue == nil
+//        return readValue!
+//    }
     
     static func answerWithText() -> String {
         var rawValue:String?
@@ -42,7 +51,7 @@ class UserFunctions {
                 print("Your name must have at least 3 letters")
             }
         } while name.count < 3
-        return name
+        return name.capitalized
     }
     
     static func chooseMenuOption(message: String, max: Int) -> Int {
