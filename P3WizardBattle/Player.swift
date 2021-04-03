@@ -55,5 +55,24 @@ class Player {
         
     }
     
+    func teamReview(versusTeamOne: [Character]) {
+        let teamOne = versusTeamOne
+        
+        for character in self.team.team {
+            if character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName  {
+                print("Your character \(character.characterType) has a named already used. Please choose a new one")
+                repeat {
+                    character.characterName = UserFunctions.answerWithText()
+                } while character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName
+            }
+        } 
+    }
+    
+    
+    
+    
+    
+
+    
 
 }

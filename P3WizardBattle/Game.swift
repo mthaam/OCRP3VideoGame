@@ -29,6 +29,8 @@ class Game {
             player.chooseTeam()
         }
         
+        playerArray[1].teamReview(versusTeamOne: playerArray[0].team.team)
+        
         
 
        

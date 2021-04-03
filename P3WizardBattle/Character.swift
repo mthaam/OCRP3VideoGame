@@ -94,6 +94,16 @@ class Character {
         return  newCharacterName
     }
     
+    //    static func checkIfPlayer1HasATeam(in array: [Character]) -> [Character]? {
+    //        guard array.count > 3 else { return nil }
+    //        var teamCopy: [Character] = []
+    //
+    //        for character in array {
+    //            teamCopy.append(character)
+    //        }
+    //        return teamCopy
+    //    }
+    
     
     
     
