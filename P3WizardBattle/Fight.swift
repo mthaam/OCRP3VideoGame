@@ -10,11 +10,11 @@ import Foundation
 
 class Fight {
     
-    var team: Team
-    var player: Player
+//    var team: Team
+    var players: [Player]
     var isOver: Bool = false
-    var winner: Player
-    var chest: Weapon
+    var winner: Player!
+    var chest: Weapon!
     
     
     
@@ -23,19 +23,23 @@ class Fight {
     
   
     
+    init(newPlayers: [Player]) {
+        self.players = newPlayers
+    }
+    
+    
+    func chooseRandomFirstPlayer() {
+        let randomNumber: Int = Int.random(in: 1...2)
+        _ = readLine()
 
-    
-    
-    
-    
-    
-    
-    init(newTeam: Team, newPlayer: Player, newWinner: Player, newChest: Weapon) {
-        self.team = newTeam
-        self.player = newPlayer
-        self.winner = newWinner
-        self.chest = newChest
-        
+        if randomNumber == 1 {
+            print("\nThe Great Spirit has chosen you \(players[0].playerName.capitalized), you will start the fight!")
+            players[0].isItPlayersTurn = true
+            
+        } else {
+            print("\nThe Great Spirit has chosen you \(players[1].playerName.capitalized), you will start the fight!")
+            players[1].isItPlayersTurn = true
+        }
     }
     
     

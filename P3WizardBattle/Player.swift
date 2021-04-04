@@ -11,6 +11,7 @@ class Player {
     var playerName: String
     var playerScore: Int = 0
     var team: Team!
+    var isItPlayersTurn: Bool = false
     
     
     
@@ -47,15 +48,17 @@ class Player {
     func chooseTeam() {
         print("\n\nPlease choose characters for player \(playerName.capitalized)")
         team = Team.chooseCharactersForPlayersTeam()
-        print("\nCongratulations \(playerName.capitalized), Your team now has the following characters")
+        print("\nCongratulations \(playerName.capitalized), your team is all set!")
+    }
+    
+    func teamReview() {
+        print("\n\(playerName.capitalized), Your team now has the following characters")
         for character in team.team {
             print(" \(character.characterName!) the \(character.characterType)")
         }
-        
-        
     }
     
-    func teamReview(versusTeamOne: [Character]) {
+    func controlTeamNames(versusTeamOne: [Character]) {
         let teamOne = versusTeamOne
         
         for character in self.team.team {
@@ -63,6 +66,9 @@ class Player {
                 print("Your character \(character.characterType) has a named already used. Please choose a new one")
                 repeat {
                     character.characterName = UserFunctions.answerWithText()
+                    if character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName {
+                        print("The name you chose is already used by Player 1. Please try again with a new different from \(teamOne[0].characterName!), \(teamOne[1].characterName!), \(teamOne[2].characterName!) ")
+                    }
                 } while character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName
             }
         } 

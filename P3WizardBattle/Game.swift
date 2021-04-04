@@ -29,8 +29,19 @@ class Game {
             player.chooseTeam()
         }
         
-        playerArray[1].teamReview(versusTeamOne: playerArray[0].team.team)
+        playerArray[1].controlTeamNames(versusTeamOne: playerArray[0].team.team)
         
+        print("Congratulations players, your almost ready to fight. Let's review your teams first.")
+        
+        for player in playerArray {
+            player.teamReview()
+        }
+        
+        print("\n\nTime to play! Now just press enter to know who the Great Spirit has chosen to play first.")
+        
+        var fight: Fight = Fight(newPlayers: playerArray)
+        
+        fight.chooseRandomFirstPlayer()
         
 
        
