@@ -59,9 +59,9 @@ class Team {
     
     func teamDisplay() {
         var counter = 0
-        for characterItem in team {
+        for characterItem in team  { //where characterItem.isAlive == true
             counter += 1
-            print("\(characterItem.characterName!) the \(characterItem.characterType)")
+            print("\(counter) - \(characterItem.characterName!) the \(characterItem.characterType)")
         }
     }
 

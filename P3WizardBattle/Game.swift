@@ -35,7 +35,7 @@ class Game {
         
         playersArray[1].controlTeamNames(versusTeamOne: playersArray[0].team.team)
         
-        print("Congratulations \(playersArray[0].playerName.capitalized) and \(playersArray[1].playerName.capitalized), you are almost ready to fight. Let's review your teams first.")
+        print("\n\n\(playersArray[0].playerName.capitalized) and \(playersArray[1].playerName.capitalized), you are almost ready to fight. Let's review your teams first.")
         
         for player in playersArray {
             player.teamReview()
@@ -43,40 +43,24 @@ class Game {
         
         print("\n\nTime to play! Now just press enter to know who the Great Spirit has chosen to play first.")
         
-
-        
         fight.chooseRandomFirstPlayer(in: playersArray)
         
         while playersArray[0].atLeastOneCharacterInTeamIsAlive == true || playersArray[1].atLeastOneCharacterInTeamIsAlive == true  {
             if  playersArray[0].isItPlayersTurn == true {
-                fight.initiateFight()
+                playersArray[0].attack(againstTeam: playersArray[1].team)
+                playersArray[0].isItPlayersTurn.toggle()
             } else {
-                fight.initiateFight()
+                playersArray[1].attack(againstTeam: playersArray[0].team)
+                playersArray[1].isItPlayersTurn.toggle()
             }
             
         }
         
-        
-        
-
-        
-
-       
     }
     
 
     
     
     
-    
-    
-    
-    
-    
-    
 
-    
-
-    
-    
 }

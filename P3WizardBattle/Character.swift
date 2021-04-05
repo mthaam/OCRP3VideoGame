@@ -12,28 +12,30 @@ class Character {
     var characterName: String!
     var characterType: String
     
-    var lifePoints: Int
-    var isAlive: Bool {lifePoints > 0}
+    var _lifePoints: Int = 10
+    var lifePoints: Int { get {_lifePoints}
+        set {_lifePoints = max(0, newValue)}
+    }
+    
+    var isAlive: Bool { lifePoints > 0 }
     var weaponOfCharacter: Weapon
     
     
-    init(newCharacterName: String, newLifePoints: Int, isAlive: Bool, newWeaponOfCharacter: Weapon, newCharacterType: String) {
+    init(newCharacterName: String, newWeaponOfCharacter: Weapon, newCharacterType: String) {
         self.characterName = newCharacterName
         self.characterType = newCharacterType
-        self.lifePoints = newLifePoints
-        self.isAlive = isAlive
         self.weaponOfCharacter = newWeaponOfCharacter
     }
     
     static func displayAvailableCharacters() -> [Character] {
         let blankWeapon = Weapon(newWeaponType: "blank", newWeaponDamagePower: 0)
         
-        let warrior = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior")
-        let knight = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight")
-        let wizard = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard")
-        let fairy = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy")
-        let demon = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon")
-        let elf = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf")
+        let warrior = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior")
+        let knight = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight")
+        let wizard = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard")
+        let fairy = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy")
+        let demon = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon")
+        let elf = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf")
         
         let characterArray: [Character] = [warrior, knight, wizard, fairy, demon, elf]
         

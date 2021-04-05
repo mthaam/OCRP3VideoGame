@@ -112,25 +112,19 @@ class Player {
                 print("The opposing team has just 3 characters! Try again with a number between 1 and 3.")
             }
         } while choiceOfCharacterToAttack < 1 || choiceOfCharacterToAttack > 3
+        // ! secure choice bc if player chooses a dead character that's an issue!!!!!!!
         
-        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.team[choice - 1].characterName!) the \(self.team.team[choice - 1].characterType) and his weapon \(self.team.team[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterName!) the \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterType) ")
+        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.team[choice - 1].characterName!.capitalized) the \(self.team.team[choice - 1].characterType) and his weapon \(self.team.team[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterType) ")
         
         _ = readLine()
         
         opposingTeam.team[choiceOfCharacterToAttack - 1].receiveHit(from: team.team[choice - 1])
         
-        
-        
-        
-        
-        
-        
-        
     }
     
     
     
-//    func chooseCharacterAndWeapon(<#parameters#>) -> <#return type#> {
+//    func chooseCharacterAndWeapon(<#parameters#>) -> <#return type#> { // to be refactored with some parts of attack()
 //        <#function body#>
 //    }
     
