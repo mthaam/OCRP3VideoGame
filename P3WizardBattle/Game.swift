@@ -7,11 +7,16 @@
 
 import Foundation
 
-enum PlayerTurn {
-    case playerOneTurn, playerTwoTurn
-}
+//enum PlayerTurn {
+//    case playerOneTurn, playerTwoTurn
+//}
 
 class Game {
+    
+    var playersArray: [Player] = []
+    var fight: Fight = Fight()
+    
+
     
 
     func launchGame() {
@@ -19,29 +24,41 @@ class Game {
         print("Welcome to Wizard Battle!")
         print("\nPlease enter names for players")
         
-        
-        let playerArray: [Player] = Player.createPlayerArray()
+        playersArray = Player.createPlayersArray()
         
         print("\nNow please choose a team for each player")
         print("Each player can choose 3 characters for his team")
         
-        for player in playerArray {
+        for player in playersArray {
             player.chooseTeam()
         }
         
-        playerArray[1].controlTeamNames(versusTeamOne: playerArray[0].team.team)
+        playersArray[1].controlTeamNames(versusTeamOne: playersArray[0].team.team)
         
-        print("Congratulations players, your almost ready to fight. Let's review your teams first.")
+        print("Congratulations \(playersArray[0].playerName.capitalized) and \(playersArray[1].playerName.capitalized), you are almost ready to fight. Let's review your teams first.")
         
-        for player in playerArray {
+        for player in playersArray {
             player.teamReview()
         }
         
         print("\n\nTime to play! Now just press enter to know who the Great Spirit has chosen to play first.")
         
-        var fight: Fight = Fight(newPlayers: playerArray)
+
         
-        fight.chooseRandomFirstPlayer()
+        fight.chooseRandomFirstPlayer(in: playersArray)
+        
+        while playersArray[0].atLeastOneCharacterInTeamIsAlive == true || playersArray[1].atLeastOneCharacterInTeamIsAlive == true  {
+            if  playersArray[0].isItPlayersTurn == true {
+                fight.initiateFight()
+            } else {
+                fight.initiateFight()
+            }
+            
+        }
+        
+        
+        
+
         
 
        

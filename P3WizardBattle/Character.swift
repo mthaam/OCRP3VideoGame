@@ -13,27 +13,27 @@ class Character {
     var characterType: String
     
     var lifePoints: Int
-    var isDead: Bool
+    var isAlive: Bool {lifePoints > 0}
     var weaponOfCharacter: Weapon
     
     
-    init(newCharacterName: String, newLifePoints: Int, newIsDead: Bool, newWeaponOfCharacter: Weapon, newCharacterType: String) {
+    init(newCharacterName: String, newLifePoints: Int, isAlive: Bool, newWeaponOfCharacter: Weapon, newCharacterType: String) {
         self.characterName = newCharacterName
         self.characterType = newCharacterType
         self.lifePoints = newLifePoints
-        self.isDead = newIsDead
+        self.isAlive = isAlive
         self.weaponOfCharacter = newWeaponOfCharacter
     }
     
     static func displayAvailableCharacters() -> [Character] {
         let blankWeapon = Weapon(newWeaponType: "blank", newWeaponDamagePower: 0)
         
-        let warrior = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior")
-        let knight = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight")
-        let wizard = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard")
-        let fairy = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy")
-        let demon = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon")
-        let elf = Character(newCharacterName: "", newLifePoints: 100, newIsDead: false, newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf")
+        let warrior = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior")
+        let knight = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight")
+        let wizard = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard")
+        let fairy = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy")
+        let demon = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon")
+        let elf = Character(newCharacterName: "", newLifePoints: 10, isAlive: true, newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf")
         
         let characterArray: [Character] = [warrior, knight, wizard, fairy, demon, elf]
         
@@ -94,16 +94,28 @@ class Character {
         return  newCharacterName
     }
     
-    //    static func checkIfPlayer1HasATeam(in array: [Character]) -> [Character]? {
-    //        guard array.count > 3 else { return nil }
-    //        var teamCopy: [Character] = []
-    //
-    //        for character in array {
-    //            teamCopy.append(character)
-    //        }
-    //        return teamCopy
-    //    }
     
+    func changeWeapon(with choice: Int, in weaponSet: [Weapon]) {
+        switch choice {
+        case 1:
+            weaponOfCharacter = weaponSet[choice - 1]
+        case 2:
+            weaponOfCharacter = weaponSet[choice - 1]
+        case 3:
+            weaponOfCharacter = weaponSet[choice - 1]
+        case 4:
+            weaponOfCharacter = weaponSet[choice - 1]
+        case 5:
+            weaponOfCharacter = weaponSet[choice - 1]
+        default:
+            break
+        }
+
+    }
+    
+    func receiveHit(from character: Character) {
+        lifePoints -= character.weaponOfCharacter.weaponDamagePower
+    }
     
     
     

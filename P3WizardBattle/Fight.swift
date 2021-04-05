@@ -10,36 +10,29 @@ import Foundation
 
 class Fight {
     
-//    var team: Team
-    var players: [Player]
+
     var isOver: Bool = false
     var winner: Player!
+    var availableWeapons: [Weapon] = Weapon.createWeaponSet()
     var chest: Weapon!
     
     
-    
-    
-//    var availableWeapons: [Weapon] = Weapon.createWeaponSet()
-    
-  
-    
-    init(newPlayers: [Player]) {
-        self.players = newPlayers
-    }
-    
-    
-    func chooseRandomFirstPlayer() {
+    func chooseRandomFirstPlayer(in playersArray: [Player]) {
         let randomNumber: Int = Int.random(in: 1...2)
         _ = readLine()
 
         if randomNumber == 1 {
-            print("\nThe Great Spirit has chosen you \(players[0].playerName.capitalized), you will start the fight!")
-            players[0].isItPlayersTurn = true
+            print("\nThe Great Spirit has chosen you \(playersArray[0].playerName.capitalized), you will start the fight!")
+            playersArray[0].isItPlayersTurn = true
             
         } else {
-            print("\nThe Great Spirit has chosen you \(players[1].playerName.capitalized), you will start the fight!")
-            players[1].isItPlayersTurn = true
+            print("\nThe Great Spirit has chosen you \(playersArray[1].playerName.capitalized), you will start the fight!")
+            playersArray[1].isItPlayersTurn = true
         }
+    }
+    
+    func initiateFight() {
+        
     }
     
     

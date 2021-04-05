@@ -12,6 +12,10 @@ class Player {
     var playerScore: Int = 0
     var team: Team!
     var isItPlayersTurn: Bool = false
+    var atLeastOneCharacterInTeamIsAlive: Bool {
+        team.team[0].isAlive || team.team[1].isAlive || team.team[2].isAlive
+    }
+    
     
     
     
@@ -19,29 +23,23 @@ class Player {
         self.playerName = newPlayerName
     }
     
-    convenience init(newPlayerName: String, newPlayerScore: Int) {
-        self.init(newPlayerName: newPlayerName)
-        self.playerScore = newPlayerScore
-    }
-    
-    
-    static func createPlayerArray() -> [Player] {
-        var playerArray: [Player] = []
+    static func createPlayersArray() -> [Player] {
+        var playersArray: [Player] = []
         repeat {
             for count in 1...2 {
                 print("Now enter name for player \(count) and press Enter")
-                playerArray.append(Player(newPlayerName: UserFunctions.askNameForPlayer()))
+                playersArray.append(Player(newPlayerName: UserFunctions.askNameForPlayer()))
             }
 
-        } while playerArray.count < 2
+        } while playersArray.count < 2
         
-        for _ in playerArray {
-            if playerArray.first?.playerName == playerArray.last?.playerName {
+        for _ in playersArray {
+            if playersArray.first?.playerName == playersArray.last?.playerName {
                 print("Players have identical names. Please change name for Player 2")
-                playerArray.last?.playerName = UserFunctions.askNameForPlayer()
+                playersArray.last?.playerName = UserFunctions.askNameForPlayer()
             }
         }
-        return playerArray
+        return playersArray
     }
     
     
@@ -67,12 +65,74 @@ class Player {
                 repeat {
                     character.characterName = UserFunctions.answerWithText()
                     if character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName {
-                        print("The name you chose is already used by Player 1. Please try again with a new different from \(teamOne[0].characterName!), \(teamOne[1].characterName!), \(teamOne[2].characterName!) ")
+                        print("The name you chose is already used by Player 1. Please try again with a new name different from \(teamOne[0].characterName!), \(teamOne[1].characterName!), \(teamOne[2].characterName!) ")
                     }
                 } while character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName
             }
         } 
     }
+    
+    
+    func attack(againstTeam opposingTeam: Team ) {
+        print("\n\(playerName), choose a character of your Team to attack with.")
+        self.team.teamDisplay()
+        
+        var choice: Int = 0
+        repeat {
+            choice = UserFunctions.setChoice()
+            if choice < 1 || choice > 3  {
+                print("You team has just 3 characters! Try again with a number between 1 and 3.")
+            }
+        } while choice < 1 || choice > 3
+        
+        print("\nNow it's time to choose a weapon. Please select a weapon in the list below:")
+        
+        let availableWeapons: [Weapon] = Weapon.createWeaponSet()
+        var counter = 0
+        for weaponItem in availableWeapons {
+            counter += 1
+            print("\(counter) - \(weaponItem.weaponType)")
+        }
+        
+        var weaponChoice = 0
+        repeat {
+            weaponChoice = UserFunctions.setChoice()
+        } while weaponChoice < 1 || weaponChoice > 5
+        
+        self.team.team[choice - 1].changeWeapon(with: weaponChoice, in: availableWeapons)
+        
+        
+        print("\nNow choose a character to attack")
+        print("Choose from the characters of the other player:")
+        opposingTeam.teamDisplay()
+        var choiceOfCharacterToAttack = 0
+        repeat {
+            choiceOfCharacterToAttack = UserFunctions.setChoice()
+            if choice < 1 || choice > 3  {
+                print("The opposing team has just 3 characters! Try again with a number between 1 and 3.")
+            }
+        } while choiceOfCharacterToAttack < 1 || choiceOfCharacterToAttack > 3
+        
+        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.team[choice - 1].characterName!) the \(self.team.team[choice - 1].characterType) and his weapon \(self.team.team[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterName!) the \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterType) ")
+        
+        _ = readLine()
+        
+        opposingTeam.team[choiceOfCharacterToAttack - 1].receiveHit(from: team.team[choice - 1])
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+//    func chooseCharacterAndWeapon(<#parameters#>) -> <#return type#> {
+//        <#function body#>
+//    }
     
     
     

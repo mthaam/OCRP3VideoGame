@@ -30,19 +30,19 @@ class Weapon {
         
         return weaponSet
     }
-// to be completed!
-//    func chestRandomWeapon() -> Weapon {
-//        return
 
-//    }
-//
     
-//    static func displayWeaponSet() {
-//    
-//    }
+    static func displayWeaponSet() {
     
-//    func chooseWeaponForCharater() {
-//        
-//    }
+    }
+    
+    // to be completed!
+    //    func chestRandomWeapon() -> Weapon {
+    //        return
+
+    //    }
+    //
+    
+
     
 }

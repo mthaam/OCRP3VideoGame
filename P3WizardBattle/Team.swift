@@ -14,7 +14,7 @@ class Team {
     
     static func chooseCharactersForPlayersTeam() -> Team {
         
-        let characterSet = Character.displayAvailableCharacters()
+        let characterSet: [Character] = Character.displayAvailableCharacters()
         var newCharacterSet: [Character] = []
         let newTeam = Team()
         
@@ -57,17 +57,13 @@ class Team {
         return newTeam
     }
     
-    
-
-    
-    
-    
-
-
-    
-    
-    
-
+    func teamDisplay() {
+        var counter = 0
+        for characterItem in team {
+            counter += 1
+            print("\(characterItem.characterName!) the \(characterItem.characterType)")
+        }
+    }
 
 }
 
