@@ -69,7 +69,7 @@ class Player {
                     }
                 } while character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName
             }
-        } 
+        }
     }
     
     
@@ -119,6 +119,8 @@ class Player {
         _ = readLine()
         
         opposingTeam.team[choiceOfCharacterToAttack - 1].receiveHit(from: team.team[choice - 1])
+        
+        isItPlayersTurn.toggle()
         
     }
     
