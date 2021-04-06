@@ -12,7 +12,7 @@ class Character {
     var characterName: String!
     var characterType: String
     
-    var _lifePoints: Int = 10
+    private var _lifePoints: Int = 10
     var lifePoints: Int { get {_lifePoints}
         set {_lifePoints = max(0, newValue)}
     }
@@ -117,7 +117,14 @@ class Character {
     
     func receiveHit(from character: Character) {
         lifePoints -= character.weaponOfCharacter.weaponDamagePower
-        print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+        
+        if _lifePoints > 0 {
+            print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+        } else {
+            print("\n👏 Good job! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
+        }
+        
+        
     }
     
     

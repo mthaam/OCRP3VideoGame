@@ -13,7 +13,7 @@ class Player {
     var team: Team!
     var isItPlayersTurn: Bool = false
     var atLeastOneCharacterInTeamIsAlive: Bool {
-        team.team[0].isAlive || team.team[1].isAlive || team.team[2].isAlive
+        team.aliveCharacters[0].isAlive || team.aliveCharacters[1].isAlive || team.aliveCharacters[2].isAlive
     }
     
     
@@ -51,7 +51,7 @@ class Player {
     
     func teamReview() {
         print("\n\(playerName.capitalized), Your team now has the following characters")
-        for character in team.team {
+        for character in team.aliveCharacters {
             print(" \(character.characterName!) the \(character.characterType)")
         }
     }
@@ -59,7 +59,7 @@ class Player {
     func controlTeamNames(versusTeamOne: [Character]) {
         let teamOne = versusTeamOne
         
-        for character in self.team.team {
+        for character in self.team.aliveCharacters {
             if character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName  {
                 print("Your character \(character.characterType) has a named already used. Please choose a new one")
                 repeat {
@@ -81,9 +81,10 @@ class Player {
         repeat {
             choice = UserFunctions.setChoice()
             if choice < 1 || choice > 3  {
-                print("You team has just 3 characters! Try again with a number between 1 and 3.")
+                print("Your team has just 3 characters! Try again with a number between 1 and 3.")
             }
         } while choice < 1 || choice > 3
+        // MAYBE THE REPEAT WHILE CAN BE REFACTORED BY UPGRADING SETCHOICE() MIN-MAX MESSAGE
         
         print("\nNow it's time to choose a weapon. Please select a weapon in the list below:")
         
@@ -97,9 +98,12 @@ class Player {
         var weaponChoice = 0
         repeat {
             weaponChoice = UserFunctions.setChoice()
+            if weaponChoice < 1 || weaponChoice > 5  {
+                print("You only have a choice of 5️⃣ weapons. Try again with a number between 1 and 5")
+            }
         } while weaponChoice < 1 || weaponChoice > 5
         
-        self.team.team[choice - 1].changeWeapon(with: weaponChoice, in: availableWeapons)
+        self.team.aliveCharacters[choice - 1].changeWeapon(with: weaponChoice, in: availableWeapons)
         
         
         print("\nNow choose a character to attack")
@@ -114,11 +118,14 @@ class Player {
         } while choiceOfCharacterToAttack < 1 || choiceOfCharacterToAttack > 3
         // ! secure choice bc if player chooses a dead character that's an issue!!!!!!!
         
-        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.team[choice - 1].characterName!.capitalized) the \(self.team.team[choice - 1].characterType) and his weapon \(self.team.team[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.team[choiceOfCharacterToAttack - 1].characterType) ")
+        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[choice - 1].characterName!.capitalized) the \(self.team.aliveCharacters[choice - 1].characterType) and his weapon \(self.team.aliveCharacters[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
         
         _ = readLine()
         
-        opposingTeam.team[choiceOfCharacterToAttack - 1].receiveHit(from: team.team[choice - 1])
+
+        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(from: team.aliveCharacters[choice - 1])
+        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
+        
         
         isItPlayersTurn.toggle()
         

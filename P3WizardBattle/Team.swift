@@ -9,8 +9,9 @@ import Foundation
 
 class Team {
     
-    var team: [Character]!
-        
+    var aliveCharacters: [Character]!
+    var deadCharacters: [Character]!
+    
     
     static func chooseCharactersForPlayersTeam() -> Team {
         
@@ -52,18 +53,26 @@ class Team {
             
         } while newCharacterSet.count < 3
         
-        newTeam.team = newCharacterSet
+        newTeam.aliveCharacters = newCharacterSet
         
         return newTeam
     }
     
     func teamDisplay() {
-        var counter = 0
-        for characterItem in team  { //where characterItem.isAlive == true
-            counter += 1
-            print("\(counter) - \(characterItem.characterName!) the \(characterItem.characterType)")
+        for (index, characterItem) in aliveCharacters.enumerated()  {
+            print("\(index + 1) - \(characterItem.characterName!) the \(characterItem.characterType)")
+        }
+    }
+    
+    func isThereACharacterToRemoveFromAliveTeam() {
+        for (index, character) in aliveCharacters.enumerated() {
+            if character.isAlive == false {
+                deadCharacters.append(character)
+                aliveCharacters.remove(at: index)
+            }
         }
     }
 
+    
 }
 

@@ -20,7 +20,7 @@ class Game {
     
 
     func launchGame() {
-        while fight.isOver == false {
+//        while fight.isOver == false {
             print("⚔️ Welcome to Wizard Battle! ⚔️")
             print("\nPlease enter names for players")
             
@@ -33,7 +33,7 @@ class Game {
                 player.chooseTeam()
             }
             
-            playersArray[1].controlTeamNames(versusTeamOne: playersArray[0].team.team)
+            playersArray[1].controlTeamNames(versusTeamOne: playersArray[0].team.aliveCharacters)
             
             print("\n\n\(playersArray[0].playerName.capitalized) and \(playersArray[1].playerName.capitalized), you are almost ready to fight. Let's review your teams first.")
             
@@ -58,7 +58,7 @@ class Game {
                 }
                 
             }
-        }
+//        }
         
         print("Goodbye Players!")
 
@@ -67,6 +67,7 @@ class Game {
     
 /*
      add a run counter and a display team stats function after each run!
+     add a message in receiveHit() that says oops you killed xx the xxx + code that removes character from team?
      */
     
     
