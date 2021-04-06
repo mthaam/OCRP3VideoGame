@@ -21,13 +21,13 @@ class Game {
 
     func launchGame() {
         while fight.isOver == false {
-            print("Welcome to Wizard Battle!")
+            print("⚔️ Welcome to Wizard Battle! ⚔️")
             print("\nPlease enter names for players")
             
             playersArray = Player.createPlayersArray()
             
-            print("\nNow please choose a team for each player")
-            print("Each player can choose 3 characters for his team")
+            print("\nNow please choose a team for each player 👨‍👨‍👦")
+            print("Each player can choose 3️⃣ characters for his team")
             
             for player in playersArray {
                 player.chooseTeam()

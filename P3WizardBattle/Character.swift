@@ -30,12 +30,12 @@ class Character {
     static func displayAvailableCharacters() -> [Character] {
         let blankWeapon = Weapon(newWeaponType: "blank", newWeaponDamagePower: 0)
         
-        let warrior = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior")
-        let knight = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight")
-        let wizard = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard")
-        let fairy = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy")
-        let demon = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon")
-        let elf = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf")
+        let warrior = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior 🥷")
+        let knight = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight 🦄")
+        let wizard = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard 🧙‍♂️")
+        let fairy = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy 🧝‍♀️")
+        let demon = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon 😈")
+        let elf = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf 🧚‍♀️")
         
         let characterArray: [Character] = [warrior, knight, wizard, fairy, demon, elf]
         
@@ -117,6 +117,7 @@ class Character {
     
     func receiveHit(from character: Character) {
         lifePoints -= character.weaponOfCharacter.weaponDamagePower
+        print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
     }
     
     

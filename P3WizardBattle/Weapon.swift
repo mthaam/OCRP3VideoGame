@@ -20,11 +20,11 @@ class Weapon {
     
     
     static func createWeaponSet() -> [Weapon] {
-        let sword = Weapon(newWeaponType: "Sword", newWeaponDamagePower: 3)
-        let wand = Weapon(newWeaponType: "Wand", newWeaponDamagePower: 5)
-        let fireStream = Weapon(newWeaponType: "Fire Stream", newWeaponDamagePower: 4)
-        let paralizer = Weapon(newWeaponType: "Paralizer", newWeaponDamagePower: 1)
-        let knife = Weapon(newWeaponType: "Knife", newWeaponDamagePower: 2 )
+        let sword = Weapon(newWeaponType: "Sword 🗡", newWeaponDamagePower: 3)
+        let wand = Weapon(newWeaponType: "Wand 🪄", newWeaponDamagePower: 5)
+        let fireStream = Weapon(newWeaponType: "Fire Stream ☄️", newWeaponDamagePower: 4)
+        let paralizer = Weapon(newWeaponType: "Paralizer ⛓", newWeaponDamagePower: 1)
+        let knife = Weapon(newWeaponType: "Knife 🔪", newWeaponDamagePower: 2 )
         
         let weaponSet: [Weapon] = [sword, wand, fireStream, paralizer, knife]
         
