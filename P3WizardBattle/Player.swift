@@ -12,9 +12,7 @@ class Player {
     var playerScore: Int = 0
     var team: Team!
     var isItPlayersTurn: Bool = false
-    var atLeastOneCharacterInTeamIsAlive: Bool {
-        team.aliveCharacters[0].isAlive || team.aliveCharacters[1].isAlive || team.aliveCharacters[2].isAlive
-    }
+    var atLeastOneCharacterInTeamIsAlive: Bool { team.aliveCharacters.count > 0 }
     
     
     
@@ -123,13 +121,22 @@ class Player {
         _ = readLine()
         
 
-        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(from: team.aliveCharacters[choice - 1])
+        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[choice - 1])
         opposingTeam.isThereACharacterToRemoveFromAliveTeam()
-        
         
         isItPlayersTurn.toggle()
         
     }
+    
+//    func playerVictory(against opposingTeam: Team) {
+//        if opposingTeam.aliveCharacters.count == 0 {
+//            print("Congratulations \(playerName), you have crushed all of your ennemies!")
+//            // winner = player attacking
+//            // func victory
+//            // fight.isOver = true
+//            //
+//        }
+//    }
     
     
     

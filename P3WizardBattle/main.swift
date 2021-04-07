@@ -8,4 +8,4 @@
 import Foundation
 
 var game = Game()
-game.launchGame()
+game.gameManager()

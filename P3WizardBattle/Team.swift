@@ -10,7 +10,7 @@ import Foundation
 class Team {
     
     var aliveCharacters: [Character]!
-    var deadCharacters: [Character]!
+    var deadCharacters: [Character] = []
     
     
     static func chooseCharactersForPlayersTeam() -> Team {
@@ -70,6 +70,13 @@ class Team {
                 deadCharacters.append(character)
                 aliveCharacters.remove(at: index)
             }
+        }
+    }
+    
+    func displayTeamStats(of oppositePlayerName: String) {
+        print("\nThe remaining characters of \(oppositePlayerName)'s team have the following stats")
+        for character in aliveCharacters {
+            print("\(character.characterName!) has \(character.lifePoints)  points of life remaining")
         }
     }
 

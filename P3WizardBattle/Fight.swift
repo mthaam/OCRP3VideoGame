@@ -9,17 +9,54 @@
 import Foundation
 
 class Fight {
-    
 
-    var isOver: Bool = false
     var winner: Player!
     var chest: Weapon!
+    var fightCounter: Int = 0
     
     
-    func chooseRandomFirstPlayer(in playersArray: [Player]) {
+    
+    func initiateFight(withPlayers playersArray: [Player]) {
+        print("\n\nTime to play! Now just press enter to know who the Great Spirit has chosen to play first.")
+        
+        chooseRandomFirstPlayer(in: playersArray)
+        
+        while playersArray[0].atLeastOneCharacterInTeamIsAlive == true && playersArray[1].atLeastOneCharacterInTeamIsAlive == true  {
+            fightCounter += 1
+            print("\nFight \(fightCounter)")
+            if  playersArray[0].isItPlayersTurn == true {
+                playersArray[0].attack(againstTeam: playersArray[1].team)
+                playersArray[1].team.displayTeamStats(of: playersArray[1].playerName)
+                playersArray[1].isItPlayersTurn.toggle()
+            } else {
+                playersArray[1].attack(againstTeam: playersArray[0].team)
+                playersArray[0].team.displayTeamStats(of: playersArray[0].playerName)
+                playersArray[0].isItPlayersTurn.toggle()
+            }
+        }
+        
+        
+    }
+    
+    
+    func winner(in playersArray: [Player]) {
+        if playersArray[0].atLeastOneCharacterInTeamIsAlive == true {
+            print("\nCongratulations \(playersArray[0].playerName), you have crushed all of your ennemies!")
+            winner = playersArray[0]
+        } else {
+            print("\nCongratulations \(playersArray[1].playerName), you have crushed all of your ennemies!")
+            winner = playersArray[1]
+        }
+        
+    }
+    
+    
+    
+    
+    private func chooseRandomFirstPlayer(in playersArray: [Player]) {
         let randomNumber: Int = Int.random(in: 1...2)
         _ = readLine()
-
+        
         if randomNumber == 1 {
             print("\nThe Great Spirit has chosen you \(playersArray[0].playerName.capitalized), you will start the fight!")
             playersArray[0].isItPlayersTurn = true

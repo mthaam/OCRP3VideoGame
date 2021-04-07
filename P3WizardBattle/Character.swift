@@ -115,13 +115,13 @@ class Character {
 
     }
     
-    func receiveHit(from character: Character) {
+    func receiveHit(by playerName: String, from character: Character) {
         lifePoints -= character.weaponOfCharacter.weaponDamagePower
         
         if _lifePoints > 0 {
             print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
         } else {
-            print("\n👏 Good job! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
+            print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
         }
         
         
