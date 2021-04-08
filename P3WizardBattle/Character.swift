@@ -20,6 +20,20 @@ class Character {
     var isAlive: Bool { lifePoints > 0 }
     var weaponOfCharacter: Weapon
     
+    private var _nbrOfHitReceived = 0
+    var nbrOfHitReceived: Int { get { _nbrOfHitReceived }
+        set { _nbrOfHitReceived = newValue} }
+    
+    private var _nbrOfSuccessfullHits: Int = 0
+    var nbrOfSuccessfullHits: Int { get { _nbrOfSuccessfullHits }
+        set { _nbrOfSuccessfullHits = newValue} }
+    
+    var percentageOfSuccessfullHits: Int { (nbrOfSuccessfullHits * 100)/nbrOfHitReceived }
+    
+    
+    
+    
+    
     
     init(newCharacterName: String, newWeaponOfCharacter: Weapon, newCharacterType: String) {
         self.characterName = newCharacterName
@@ -116,7 +130,8 @@ class Character {
     }
     
     func receiveHit(by playerName: String, from character: Character) {
-        lifePoints -= character.weaponOfCharacter.weaponDamagePower
+        lifePoints -= min(character.weaponOfCharacter.weaponDamagePower, lifePoints)
+        nbrOfHitReceived += 1
         
         if _lifePoints > 0 {
             print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
@@ -125,6 +140,12 @@ class Character {
         }
         
         
+    }
+    
+    
+    func displayCharacterStatsAtEndOfGame() {
+        print("\n\(characterName!) was hit \(nbrOfHitReceived). \(nbrOfSuccessfullHits) were successfull.")
+        print("That's a \(percentageOfSuccessfullHits)% success rate")
     }
     
     

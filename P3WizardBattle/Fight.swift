@@ -50,6 +50,22 @@ class Fight {
         
     }
     
+    func displayBattleFinalStats(in playersArray: [Player]) {
+        print("The total number of runs is \(fightCounter)")
+        
+        print("\n\n 🏆 🏆 🏆 🏆 🏆\n\n The winner is \(winner!.playerName)\n\n🏆 🏆 🏆 🏆 🏆")
+        
+        print("\n\nNow lets review each team's statistics :")
+        
+        for player in playersArray {
+            print("\n\(player.playerName), your team has the following stats")
+            player.team.displayFinalTeamStats()
+        }
+        
+        print("\n\n Well done players!")
+        
+    }
+    
     
     
     
