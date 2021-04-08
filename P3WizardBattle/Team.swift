@@ -27,12 +27,7 @@ class Team {
             counter += 1
             print("\nPlease choose character \(counter) and press Enter")
             
-            repeat {
-                userChoice = UserFunctions.setChoice()
-                if userChoice < 1 || userChoice > 6 {
-                    print("Your choice is out of range. Please try again with a choice between 1 and 6")
-                }
-            } while userChoice < 1 || userChoice > 6
+            userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "Your choice is out of range. Please try again with a choice between 1 and 6")
             
             switch userChoice {
             case 1:

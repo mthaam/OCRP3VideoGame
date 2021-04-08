@@ -9,27 +9,17 @@ import Foundation
 
 class UserFunctions {
     
-    
-    static func setChoice() -> Int {
-        var readValue: Int?
+        
+    static func setChoice(minimumChoice: Int, maximumChoice: Int, errorMessage: String ) -> Int {
+        var userChoice: Int
         repeat {
-            let choice = UserFunctions.answerWithIntNumber()
-            readValue = choice
-        } while readValue == nil
-        return readValue!
+            userChoice = UserFunctions.answerWithIntNumber()
+            if userChoice < minimumChoice || userChoice > maximumChoice  {
+                print(errorMessage)
+            }
+        } while userChoice < minimumChoice || userChoice > maximumChoice
+        return userChoice
     }
-    
-//    static func setChoice() -> Int {
-//        var readValue: Int?
-//        repeat {
-//            let choice = UserFunctions.answerWithText()
-//            if let newChoice = Int(choice) {
-//                readValue = newChoice
-//            }
-//
-//        } while readValue == nil
-//        return readValue!
-//    }
     
     static func answerWithText() -> String {
         var rawValue:String?
@@ -53,16 +43,6 @@ class UserFunctions {
         } while name.count < 3
         return name.capitalized
     }
-    
-    static func chooseMenuOption(message: String, max: Int) -> Int {
-        var userChoice: Int
-        repeat {
-            print(message)
-            userChoice = UserFunctions.answerWithIntNumber()
-        } while userChoice < 1 || userChoice > max
-        return userChoice
-    }
-    
     
     static func answerWithIntNumber() -> Int {
         var readValue: Int?

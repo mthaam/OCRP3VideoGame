@@ -31,7 +31,7 @@ class Game {
     
     
     private func launchGame() {
-        print("⚔️ Welcome to Wizard Battle! ⚔️")
+        print("\n⚔️ Welcome to Wizard Battle! ⚔️")
         print("\nPlease enter names for players")
         
         playersArray = Player.createPlayersArray()

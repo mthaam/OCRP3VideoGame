@@ -75,14 +75,8 @@ class Player {
         print("\n\(playerName), choose a character of your Team to attack with.")
         self.team.teamDisplay()
         
-        var choice: Int = 0
-        repeat {
-            choice = UserFunctions.setChoice()
-            if choice < 1 || choice > 3  {
-                print("Your team has just 3 characters! Try again with a number between 1 and 3.")
-            }
-        } while choice < 1 || choice > 3
-        // MAYBE THE REPEAT WHILE CAN BE REFACTORED BY UPGRADING SETCHOICE() MIN-MAX MESSAGE
+        let choice: Int = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: self.team.aliveCharacters.count, errorMessage: "Your team has just 3 characters! Try again with a number between 1 and 3.")
+
         
         print("\nNow it's time to choose a weapon. Please select a weapon in the list below:")
         
@@ -93,13 +87,7 @@ class Player {
             print("\(counter) - \(weaponItem.weaponType)")
         }
         
-        var weaponChoice = 0
-        repeat {
-            weaponChoice = UserFunctions.setChoice()
-            if weaponChoice < 1 || weaponChoice > 5  {
-                print("You only have a choice of 5️⃣ weapons. Try again with a number between 1 and 5")
-            }
-        } while weaponChoice < 1 || weaponChoice > 5
+        let weaponChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: availableWeapons.count, errorMessage: "You only have a choice of 5️⃣ weapons. Try again with a number between 1 and 5")
         
         self.team.aliveCharacters[choice - 1].changeWeapon(with: weaponChoice, in: availableWeapons)
         
@@ -107,14 +95,7 @@ class Player {
         print("\nNow choose a character to attack")
         print("Choose from the characters of the other player:")
         opposingTeam.teamDisplay()
-        var choiceOfCharacterToAttack = 0
-        repeat {
-            choiceOfCharacterToAttack = UserFunctions.setChoice()
-            if choice < 1 || choice > 3  {
-                print("The opposing team has just 3 characters! Try again with a number between 1 and 3.")
-            }
-        } while choiceOfCharacterToAttack < 1 || choiceOfCharacterToAttack > 3
-        // ! secure choice bc if player chooses a dead character that's an issue!!!!!!!
+        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage: "The opposing team has just 3 characters! Try again with a number between 1 and 3.")
         
         print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[choice - 1].characterName!.capitalized) the \(self.team.aliveCharacters[choice - 1].characterType) and his weapon \(self.team.aliveCharacters[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
         
@@ -127,19 +108,6 @@ class Player {
         isItPlayersTurn.toggle()
         
     }
-    
-//    func playerVictory(against opposingTeam: Team) {
-//        if opposingTeam.aliveCharacters.count == 0 {
-//            print("Congratulations \(playerName), you have crushed all of your ennemies!")
-//            // winner = player attacking
-//            // func victory
-//            // fight.isOver = true
-//            //
-//        }
-//    }
-    
-    
-    
 //    func chooseCharacterAndWeapon(<#parameters#>) -> <#return type#> { // to be refactored with some parts of attack()
 //        <#function body#>
 //    }
