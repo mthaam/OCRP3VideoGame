@@ -109,6 +109,7 @@ class Player {
 
         opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[characterChoice - 1])
         opposingTeam.isThereACharacterToRemoveFromAliveTeam()
+        team.aliveCharacters[characterChoice - 1].incrementGivenHits()
         
         isItPlayersTurn.toggle()
         

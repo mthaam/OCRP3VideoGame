@@ -30,7 +30,10 @@ class Character {
     
     var percentageOfSuccessfullHits: Int { (nbrOfSuccessfullHits * 100)/nbrOfHitReceived }
     
-    private var givenHits: Int = 0
+    private var _givenHits: Int = 0
+    var givenHits: Int { get { _givenHits}
+        set { _givenHits = newValue} } 
+    
     
     
     
@@ -139,15 +142,26 @@ class Character {
         } else {
             print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
         }
-        
-        
     }
     
     
     func displayCharacterStatsAtEndOfGame() {
+        guard nbrOfHitReceived > 0 else {
+            print("\(characterName!) was never hit")
+            return
+        }
         print("\n\(characterName!) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
         print("That's a \(percentageOfSuccessfullHits)% success rate")
+        print("He/She also gave \(givenHits) hits to his fellow ennemies.")
     }
+    
+    func incrementGivenHits() {
+        givenHits += 1
+    }
+    
+//    func incrementReceivedHits() {
+//        <#function body#>
+//    }
     
     
     
