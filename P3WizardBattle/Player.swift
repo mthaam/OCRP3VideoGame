@@ -118,9 +118,11 @@ class Player {
     private func displayWeaponSetAndChoose(withSelected choice: Int) {
         let availableWeapons: [Weapon] = Weapon.createWeaponSet()
         var counter = 0
+        print("\n⁉️ Weapon power is the ability for a weapon to remove lifepoints to an ennemy.\nThe accuracy is the abilty for a weapon to actually harm the ennemy.")
+        print("The more powerful the weapon, the less accurate it will be.")
         for weaponItem in availableWeapons {
             counter += 1
-            print("\(counter) - \(weaponItem.weaponType)")
+            print("\(counter) - \(weaponItem.features)")
         }
         
         let weaponChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: availableWeapons.count, errorMessage: "You only have a choice of 5️⃣ weapons. Try again with a number between 1 and 5")

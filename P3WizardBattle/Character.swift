@@ -32,7 +32,7 @@ class Character {
     
     private var _givenHits: Int = 0
     var givenHits: Int { get { _givenHits}
-        set { _givenHits = newValue} } 
+        set { _givenHits = newValue} }
     
     
     
@@ -134,14 +134,23 @@ class Character {
     }
     
     func receiveHit(by playerName: String, from character: Character) {
-        lifePoints -= min(character.weaponOfCharacter.weaponDamagePower, lifePoints)
-        nbrOfHitReceived += 1
+        let lifePointsToRemove = character.weaponOfCharacter.generateWeaponDamage()
         
-        if _lifePoints > 0 {
-            print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+        if lifePointsToRemove >= character.weaponOfCharacter.weaponDamagePower {
+            lifePoints -= min(lifePointsToRemove, lifePoints)
+            nbrOfHitReceived += 1
+            nbrOfSuccessfullHits += 1
+            
+            if _lifePoints > 0 {
+                print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+            } else {
+                print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
+            }
         } else {
-            print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
+            print("You missed the target. Maybe next time!")
         }
+        
+       
     }
     
     
@@ -162,6 +171,8 @@ class Character {
 //    func incrementReceivedHits() {
 //        <#function body#>
 //    }
+    
+
     
     
     
