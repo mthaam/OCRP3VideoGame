@@ -7,10 +7,6 @@
 
 import Foundation
 
-//enum PlayerTurn {
-//    case playerOneTurn, playerTwoTurn
-//}
-
 class Game {
     
     var isOver: Bool = false
@@ -24,9 +20,8 @@ class Game {
         while isOver == false {
             launchGame()
             battle()
+            exitOrNewGame()
         }
-        
-        print("Goodbye Players!")
     }
     
     
@@ -56,17 +51,22 @@ class Game {
     private func battle() {
         fight.initiateFight(withPlayers: playersArray)
         fight.winner(in: playersArray)
+        fight.displayBattleFinalStats(in: playersArray)
     }
     
+    private func exitOrNewGame() {
+        print("\n\nWhat would you like to do now?\n\n- Enter 1 to start a new game\n\n- Enter 2 to exit game")
+        let choice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "You can only answer with 1 to start a new game, or 2 to exit game. Please try again.")
+        if choice == 1 {
+            playersArray.removeAll()
+        } else {
+            print("Goodbye! 👋")
+            isOver = true
+        }
+    }
+
     
     
-    /*
-     add a displayFIghtStats() function
-     */
-    
-    /*
-     private func startANewGame? linked to isOver
-     */
     
     
     

@@ -108,9 +108,7 @@ class Player {
         isItPlayersTurn.toggle()
         
     }
-//    func chooseCharacterAndWeapon(<#parameters#>) -> <#return type#> { // to be refactored with some parts of attack()
-//        <#function body#>
-//    }
+
     
     
     

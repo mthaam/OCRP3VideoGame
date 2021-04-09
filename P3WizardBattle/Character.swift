@@ -144,7 +144,7 @@ class Character {
     
     
     func displayCharacterStatsAtEndOfGame() {
-        print("\n\(characterName!) was hit \(nbrOfHitReceived). \(nbrOfSuccessfullHits) were successfull.")
+        print("\n\(characterName!) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
         print("That's a \(percentageOfSuccessfullHits)% success rate")
     }
     

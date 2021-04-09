@@ -78,21 +78,21 @@ class Team {
     
     func displayFinalTeamStats() {
         if aliveCharacters.count > 0 {
-            print("You had \(aliveCharacters.count) who survived :")
+            print("\nYou had \(aliveCharacters.count) who survived 💪 :")
             for character in aliveCharacters {
                 character.displayCharacterStatsAtEndOfGame()
             }
         } else if aliveCharacters.count > 0 && deadCharacters.count > 0 {
-            print("You had \(aliveCharacters.count) who survived :")
+            print("\nYou had \(aliveCharacters.count) who survived 💪 :")
             for character in aliveCharacters {
                 character.displayCharacterStatsAtEndOfGame()
             }
-            print("You also had \(deadCharacters.count) who were killed ☠️ :")
+            print("\nYou also had \(deadCharacters.count) who were killed ☠️ :")
             for character in deadCharacters {
                 character.displayCharacterStatsAtEndOfGame()
             }
         } else {
-            print("All character in your team were killed ☠️")
+            print("\nAll character in your team were killed ☠️")
             for character in deadCharacters {
                 character.displayCharacterStatsAtEndOfGame()
             }
