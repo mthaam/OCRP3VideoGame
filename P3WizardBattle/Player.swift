@@ -75,11 +75,46 @@ class Player {
         print("\n\(playerName), choose a character of your Team to attack with.")
         self.team.teamDisplay()
         
-        let choice: Int = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: self.team.aliveCharacters.count, errorMessage: "Your team has just 3 characters! Try again with a number between 1 and 3.")
+        let characterChoice: Int = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: self.team.aliveCharacters.count, errorMessage: "Your team has just 3 characters! Try again with a number between 1 and 3.")
 
         
-        print("\nNow it's time to choose a weapon. Please select a weapon in the list below:")
+        if self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter == nil {
+            print("\nNow it's time to choose a weapon. Please select a weapon in the list below:")
+            displayWeaponSetAndChoose(withSelected: characterChoice)
+            
+        } else {
+            print("\nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName!) has a weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.weaponType) with....") // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            print("Would you like to keep or change this weapon?")
+            print("Enter 1 to keep - Enter 2 to change")
+            let keepOrChangeWeapon = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "You can only choose 1 to keep your character's current weapon, or 2 to keep it. Please try again.")
+            if keepOrChangeWeapon == 1 {
+                print("\nOK \(playerName)!")
+            } else {
+                print("\nPlease select a new weapon in the list below:")
+                displayWeaponSetAndChoose(withSelected: characterChoice)
+            }
+            
+        }
         
+       
+        print("\nNow choose a character to attack")
+        print("Choose from the characters of the other player:")
+        opposingTeam.teamDisplay()
+        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage: "The opposing team has just 3 characters! Try again with a number between 1 and 3.")
+        
+        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName!.capitalized) the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
+        
+        _ = readLine()
+        
+
+        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[characterChoice - 1])
+        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
+        
+        isItPlayersTurn.toggle()
+        
+    }
+    
+    private func displayWeaponSetAndChoose(withSelected choice: Int) {
         let availableWeapons: [Weapon] = Weapon.createWeaponSet()
         var counter = 0
         for weaponItem in availableWeapons {
@@ -90,23 +125,6 @@ class Player {
         let weaponChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: availableWeapons.count, errorMessage: "You only have a choice of 5️⃣ weapons. Try again with a number between 1 and 5")
         
         self.team.aliveCharacters[choice - 1].changeWeapon(with: weaponChoice, in: availableWeapons)
-        
-        
-        print("\nNow choose a character to attack")
-        print("Choose from the characters of the other player:")
-        opposingTeam.teamDisplay()
-        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage: "The opposing team has just 3 characters! Try again with a number between 1 and 3.")
-        
-        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[choice - 1].characterName!.capitalized) the \(self.team.aliveCharacters[choice - 1].characterType) and his weapon \(self.team.aliveCharacters[choice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
-        
-        _ = readLine()
-        
-
-        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[choice - 1])
-        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
-        
-        isItPlayersTurn.toggle()
-        
     }
 
     

@@ -18,7 +18,7 @@ class Character {
     }
     
     var isAlive: Bool { lifePoints > 0 }
-    var weaponOfCharacter: Weapon
+    var weaponOfCharacter: Weapon!
     
     private var _nbrOfHitReceived = 0
     var nbrOfHitReceived: Int { get { _nbrOfHitReceived }
@@ -30,26 +30,27 @@ class Character {
     
     var percentageOfSuccessfullHits: Int { (nbrOfSuccessfullHits * 100)/nbrOfHitReceived }
     
+    private var givenHits: Int = 0
     
     
     
     
     
-    init(newCharacterName: String, newWeaponOfCharacter: Weapon, newCharacterType: String) {
+    
+    init(newCharacterName: String, newCharacterType: String) {
         self.characterName = newCharacterName
         self.characterType = newCharacterType
-        self.weaponOfCharacter = newWeaponOfCharacter
     }
     
     static func displayAvailableCharacters() -> [Character] {
-        let blankWeapon = Weapon(newWeaponType: "blank", newWeaponDamagePower: 0)
         
-        let warrior = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Warrior 🥷")
-        let knight = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Knight 🦄")
-        let wizard = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Wizard 🧙‍♂️")
-        let fairy = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Fairy 🧝‍♀️")
-        let demon = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Deamon 😈")
-        let elf = Character(newCharacterName: "", newWeaponOfCharacter: blankWeapon, newCharacterType: "Elf 🧚‍♀️")
+        
+        let warrior = Character(newCharacterName: "", newCharacterType: "Warrior 🥷")
+        let knight = Character(newCharacterName: "", newCharacterType: "Knight 🦄")
+        let wizard = Character(newCharacterName: "", newCharacterType: "Wizard 🧙‍♂️")
+        let fairy = Character(newCharacterName: "", newCharacterType: "Fairy 🧝‍♀️")
+        let demon = Character(newCharacterName: "", newCharacterType: "Deamon 😈")
+        let elf = Character(newCharacterName: "", newCharacterType: "Elf 🧚‍♀️")
         
         let characterArray: [Character] = [warrior, knight, wizard, fairy, demon, elf]
         
@@ -147,6 +148,8 @@ class Character {
         print("\n\(characterName!) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
         print("That's a \(percentageOfSuccessfullHits)% success rate")
     }
+    
+    
     
     
     
