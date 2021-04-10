@@ -13,6 +13,8 @@ class Player {
     var team: Team!
     var isItPlayersTurn: Bool = false
     var atLeastOneCharacterInTeamIsAlive: Bool { team.aliveCharacters.count > 0 }
+    private let immutableChestLockKey: Int = 5
+    
     
     
     
@@ -72,6 +74,8 @@ class Player {
     
     
     func attack(againstTeam opposingTeam: Team ) {
+        let randomlyGeneratedChestOpeningKey: Int = Int.random(in: 1...10)
+        
         print("\n\(playerName), choose a character of your Team to attack with.")
         self.team.teamDisplay()
         
@@ -83,17 +87,29 @@ class Player {
             displayWeaponSetAndChoose(withSelected: characterChoice)
             
         } else {
-            print("\nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName!) has a weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.weaponType) with....") // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            print("Would you like to keep or change this weapon?")
-            print("Enter 1 to keep - Enter 2 to change")
-            let keepOrChangeWeapon = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "You can only choose 1 to keep your character's current weapon, or 2 to keep it. Please try again.")
-            if keepOrChangeWeapon == 1 {
-                print("\nOK \(playerName)!")
+            if immutableChestLockKey == randomlyGeneratedChestOpeningKey {
+                print("\n⚡️ The Great Spirit just sent a ligthning, and it happened to strike just in front of you. Look \(playerName), a magic chest appearead! 🧰")
+                print("It contains a new weapon, but you can't know in advance if it's more or less powerful and accurate than your character's current weapon.")
+                print("\nWould you like to use this weapon?\n- Enter 1 to use it\n- Enter 2 to keep your character's current weapon")
+                let chooseToUseChest = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "You can only choose 1 to use the new weapon in chest, or 2 to keep your character's current weapon.")
+                if chooseToUseChest == 1 {
+                    self.team.aliveCharacters[characterChoice - 1].changeWeaponWithMagicChestWeapon()
+                } else {
+                    print("\nOK \(playerName), you're not a gambler!")
+                }
+                
             } else {
-                print("\nPlease select a new weapon in the list below:")
-                displayWeaponSetAndChoose(withSelected: characterChoice)
+                print("\nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName!) has the weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.features)")
+                print("Would you like to keep or change this weapon?")
+                print("Enter 1 to keep - Enter 2 to change")
+                let keepOrChangeWeapon = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "You can only choose 1 to keep your character's current weapon, or 2 to keep it. Please try again.")
+                if keepOrChangeWeapon == 1 {
+                    print("\nOK \(playerName)!")
+                } else {
+                    print("\nPlease select a new weapon in the list below:")
+                    displayWeaponSetAndChoose(withSelected: characterChoice)
+                }
             }
-            
         }
         
        

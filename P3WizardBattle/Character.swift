@@ -149,8 +149,6 @@ class Character {
         } else {
             print("You missed the target. Maybe next time!")
         }
-        
-       
     }
     
     
@@ -171,6 +169,17 @@ class Character {
 //    func incrementReceivedHits() {
 //        <#function body#>
 //    }
+    
+    func changeWeaponWithMagicChestWeapon() {
+        let randomlyGeneratedWeapon: Weapon = Weapon.chestRandomWeaponGenerator()
+        if randomlyGeneratedWeapon.weaponDamagePower < weaponOfCharacter.weaponDamagePower {
+            print("\nBad luck! 🥀 The chest contains a less powerful weapon!")
+        } else {
+            print("\nThis is your lucky day! 🍀 The chest contains a more powerful weapon!")
+        }
+        weaponOfCharacter = randomlyGeneratedWeapon
+    }
+    
     
 
     
