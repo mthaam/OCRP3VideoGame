@@ -75,6 +75,7 @@ class Player {
     
     func attack(againstTeam opposingTeam: Team ) {
         let randomlyGeneratedChestOpeningKey: Int = Int.random(in: 1...10)
+        var temporaryWeaponSaver: Weapon!
         
         print("\n\(playerName), choose a character of your Team to attack with.")
         self.team.teamDisplay()
@@ -84,10 +85,11 @@ class Player {
         
         if self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter == nil {
             print("\nNow it's time to choose a weapon. Please select a weapon in the list below:")
-            displayWeaponSetAndChoose(withSelected: characterChoice)
+            displayWeaponSetAndChooseAWeapon(withSelected: characterChoice)
             
         } else {
             if immutableChestLockKey == randomlyGeneratedChestOpeningKey {
+                temporaryWeaponSaver = self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter
                 print("\n⚡️ The Great Spirit just sent a ligthning, and it happened to strike just in front of you. Look \(playerName), a magic chest appearead! 🧰")
                 print("It contains a new weapon, but you can't know in advance if it's more or less powerful and accurate than your character's current weapon.")
                 print("\nWould you like to use this weapon?\n- Enter 1 to use it\n- Enter 2 to keep your character's current weapon")
@@ -107,7 +109,7 @@ class Player {
                     print("\nOK \(playerName)!")
                 } else {
                     print("\nPlease select a new weapon in the list below:")
-                    displayWeaponSetAndChoose(withSelected: characterChoice)
+                    displayWeaponSetAndChooseAWeapon(withSelected: characterChoice)
                 }
             }
         }
@@ -124,14 +126,19 @@ class Player {
         
 
         opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[characterChoice - 1])
-        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
+//        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
         team.aliveCharacters[characterChoice - 1].incrementGivenHits()
         
+        if temporaryWeaponSaver != nil {
+            print("\nJust so you know \(playerName.capitalized), your character got back the weapon he had before opening the chest. Next time you attack with him, he will use \(temporaryWeaponSaver.features) unless you choose another weapon.")
+            self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter = temporaryWeaponSaver
+        }
+        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
         isItPlayersTurn.toggle()
         
     }
     
-    private func displayWeaponSetAndChoose(withSelected choice: Int) {
+    private func displayWeaponSetAndChooseAWeapon(withSelected choice: Int) {
         let availableWeapons: [Weapon] = Weapon.createWeaponSet()
         var counter = 0
         print("\n⁉️ Weapon power is the ability for a weapon to remove lifepoints to an ennemy.\nThe accuracy is the abilty for a weapon to actually harm the ennemy.")

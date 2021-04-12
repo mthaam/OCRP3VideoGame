@@ -15,13 +15,13 @@ class Team {
     
     static func chooseCharactersForPlayersTeam() -> Team {
         
-        let characterSet: [Character] = Character.displayAvailableCharacters()
         var newCharacterSet: [Character] = []
         let newTeam = Team()
         
         
         var counter: Int = 0
         repeat {
+            let characterSet: [Character] = Character.displayAvailableCharacters()
             var userChoice: Int = 0
             
             counter += 1
@@ -80,21 +80,16 @@ class Team {
         if aliveCharacters.count > 0 {
             print("\nYou had \(aliveCharacters.count) who survived 💪 :")
             for character in aliveCharacters {
-                character.displayCharacterStatsAtEndOfGame()
-            }
-        } else if aliveCharacters.count > 0 && deadCharacters.count > 0 {
-            print("\nYou had \(aliveCharacters.count) who survived 💪 :")
-            for character in aliveCharacters {
-                character.displayCharacterStatsAtEndOfGame()
+                character.readCharacterStatsAtEndOfGame()
             }
             print("\nYou also had \(deadCharacters.count) who were killed ☠️ :")
             for character in deadCharacters {
-                character.displayCharacterStatsAtEndOfGame()
+                character.readCharacterStatsAtEndOfGame()
             }
         } else {
             print("\nAll character in your team were killed ☠️")
             for character in deadCharacters {
-                character.displayCharacterStatsAtEndOfGame()
+                character.readCharacterStatsAtEndOfGame()
             }
         }
     }

@@ -28,7 +28,7 @@ class Character {
     var nbrOfSuccessfullHits: Int { get { _nbrOfSuccessfullHits }
         set { _nbrOfSuccessfullHits = newValue} }
     
-    var percentageOfSuccessfullHits: Int { (nbrOfSuccessfullHits * 100)/nbrOfHitReceived }
+    var percentageOfSuccessfullHitsReceived: Int { (nbrOfSuccessfullHits * 100)/nbrOfHitReceived }
     
     private var _givenHits: Int = 0
     var givenHits: Int { get { _givenHits}
@@ -130,15 +130,14 @@ class Character {
         default:
             break
         }
-
+        
     }
     
     func receiveHit(by playerName: String, from character: Character) {
         let lifePointsToRemove = character.weaponOfCharacter.generateWeaponDamage()
-        
+        nbrOfHitReceived += 1
         if lifePointsToRemove >= character.weaponOfCharacter.weaponDamagePower {
             lifePoints -= min(lifePointsToRemove, lifePoints)
-            nbrOfHitReceived += 1
             nbrOfSuccessfullHits += 1
             
             if _lifePoints > 0 {
@@ -152,23 +151,19 @@ class Character {
     }
     
     
-    func displayCharacterStatsAtEndOfGame() {
+    func readCharacterStatsAtEndOfGame() {
         guard nbrOfHitReceived > 0 else {
             print("\(characterName!) was never hit")
             return
         }
         print("\n\(characterName!) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
-        print("That's a \(percentageOfSuccessfullHits)% success rate")
+        print("That's a \(percentageOfSuccessfullHitsReceived)% success rate")
         print("He/She also gave \(givenHits) hits to his fellow ennemies.")
     }
     
     func incrementGivenHits() {
         givenHits += 1
     }
-    
-//    func incrementReceivedHits() {
-//        <#function body#>
-//    }
     
     func changeWeaponWithMagicChestWeapon() {
         let randomlyGeneratedWeapon: Weapon = Weapon.chestRandomWeaponGenerator()
@@ -181,7 +176,7 @@ class Character {
     }
     
     
-
+    
     
     
     
