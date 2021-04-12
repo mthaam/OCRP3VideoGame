@@ -38,8 +38,6 @@ class Game {
             player.chooseTeam()
         }
         
-        playersArray[1].controlTeamNames(versusTeamOne: playersArray[0].team.aliveCharacters)
-        
         print("\n\n\(playersArray[0].playerName.capitalized) and \(playersArray[1].playerName.capitalized), you are almost ready to fight. Let's review your teams first.")
         
         for player in playersArray {

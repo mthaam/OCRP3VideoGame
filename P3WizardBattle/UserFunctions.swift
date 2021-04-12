@@ -9,7 +9,25 @@ import Foundation
 
 class UserFunctions {
     
-        
+    static var usedPlayerNames: [String] = []
+    static var usedCharacterNames: [String] = []
+    
+    
+    static func askNameForPlayer() -> String {
+        var name: String = ""
+        repeat {
+            name = UserFunctions.answerWithText()
+            if name.count < 3 {
+                print("\nYour name must have at least 3 letters")
+            }
+            if usedPlayerNames.contains(name) {
+                print("\nThis name is already used. Please choose another one.")
+            }
+        } while name.count < 3 || usedPlayerNames.contains(name)
+        usedPlayerNames.append(name)
+        return name.capitalized
+    }
+    
     static func setChoice(minimumChoice: Int, maximumChoice: Int, errorMessage: String ) -> Int {
         var userChoice: Int
         repeat {
@@ -31,17 +49,6 @@ class UserFunctions {
         } while rawValue == nil
         
         return rawValue!
-    }
-    
-    static func askNameForPlayer() -> String {
-        var name: String = ""
-        repeat{
-            name = UserFunctions.answerWithText()
-            if name.count < 3 {
-                print("Your name must have at least 3 letters")
-            }
-        } while name.count < 3
-        return name.capitalized
     }
     
     static func answerWithIntNumber() -> Int {

@@ -33,12 +33,7 @@ class Player {
 
         } while playersArray.count < 2
         
-        for _ in playersArray {
-            if playersArray.first?.playerName == playersArray.last?.playerName {
-                print("Players have identical names. Please change name for Player 2")
-                playersArray.last?.playerName = UserFunctions.askNameForPlayer()
-            }
-        }
+        
         return playersArray
     }
     
@@ -55,23 +50,7 @@ class Player {
             print(" \(character.characterName!) the \(character.characterType)")
         }
     }
-    
-    func controlTeamNames(versusTeamOne: [Character]) {
-        let teamOne = versusTeamOne
         
-        for character in self.team.aliveCharacters {
-            if character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName  {
-                print("Your character \(character.characterType) has a named already used. Please choose a new one")
-                repeat {
-                    character.characterName = UserFunctions.answerWithText()
-                    if character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName {
-                        print("The name you chose is already used by Player 1. Please try again with a new name different from \(teamOne[0].characterName!), \(teamOne[1].characterName!), \(teamOne[2].characterName!) ")
-                    }
-                } while character.characterName == teamOne[0].characterName || character.characterName == teamOne[1].characterName || character.characterName == teamOne[2].characterName
-            }
-        }
-    }
-    
     
     func attack(againstTeam opposingTeam: Team ) {
         let randomlyGeneratedChestOpeningKey: Int = Int.random(in: 1...10)
@@ -126,7 +105,6 @@ class Player {
         
 
         opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[characterChoice - 1])
-//        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
         team.aliveCharacters[characterChoice - 1].incrementGivenHits()
         
         if temporaryWeaponSaver != nil {
