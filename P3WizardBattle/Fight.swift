@@ -11,7 +11,6 @@ import Foundation
 class Fight {
 
     var winner: Player!
-    var chest: Weapon!
     var fightCounter: Int = 0
     
     
