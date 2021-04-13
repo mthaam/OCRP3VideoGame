@@ -9,7 +9,7 @@ import Foundation
 
 class Player {
     var playerName: String
-    var team: Team!
+    var team: Team = Team()
     var isItPlayersTurn: Bool = false
     var atLeastOneCharacterInTeamIsAlive: Bool { team.aliveCharacters.count > 0 }
     private let immutableChestLockKey: Int = 5
