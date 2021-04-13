@@ -92,13 +92,14 @@ class Character {
                 print("\nThe name you chose is too short, please choose a name with at least 3 letters")
             }
             
-            if UserFunctions.usedCharacterNames.contains(newCharacterName) {
+            if UserFunctions.usedCharacterNames.contains(newCharacterName) || UserFunctions.usedCharacterNames.contains(newCharacterName.capitalized) {
                 print("\nThis name is already used by another character. Please choose another one.")
             }
             
-        } while newCharacterName.count < 3 || UserFunctions.usedCharacterNames.contains(newCharacterName)
+        } while newCharacterName.count < 3 || UserFunctions.usedCharacterNames.contains(newCharacterName) || UserFunctions.usedCharacterNames.contains(newCharacterName.capitalized)
         characterName = newCharacterName
         UserFunctions.usedCharacterNames.append(newCharacterName)
+        UserFunctions.usedCharacterNames.append(newCharacterName.capitalized)
         
     }
     

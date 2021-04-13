@@ -20,11 +20,12 @@ class UserFunctions {
             if name.count < 3 {
                 print("\nYour name must have at least 3 letters")
             }
-            if usedPlayerNames.contains(name) {
+            if usedPlayerNames.contains(name) || usedPlayerNames.contains(name.capitalized) {
                 print("\nThis name is already used. Please choose another one.")
             }
-        } while name.count < 3 || usedPlayerNames.contains(name)
+        } while name.count < 3 || usedPlayerNames.contains(name) || usedPlayerNames.contains(name.capitalized)
         usedPlayerNames.append(name)
+        usedPlayerNames.append(name.capitalized)
         return name.capitalized
     }
     
