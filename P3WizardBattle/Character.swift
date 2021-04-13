@@ -89,11 +89,11 @@ class Character {
         repeat {
             newCharacterName = UserFunctions.answerWithText()
             if newCharacterName.count < 3 {
-                print("\nThe name you chose is too short, please choose a name with at least 3 letters")
+                print("\n❌ The name you chose is too short, please choose a name with at least 3 letters")
             }
             
             if UserFunctions.usedCharacterNames.contains(newCharacterName) || UserFunctions.usedCharacterNames.contains(newCharacterName.capitalized) {
-                print("\nThis name is already used by another character. Please choose another one.")
+                print("\n❌ This name is already used by another character. Please choose another one.")
             }
             
         } while newCharacterName.count < 3 || UserFunctions.usedCharacterNames.contains(newCharacterName) || UserFunctions.usedCharacterNames.contains(newCharacterName.capitalized)
@@ -132,10 +132,10 @@ class Character {
             if _lifePoints > 0 {
                 print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
             } else {
-                print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)!")
+                print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)! ☠️")
             }
         } else {
-            print("You missed the target. Maybe next time!")
+            print("You missed the target. Maybe next time! 🙀")
         }
     }
     
@@ -145,7 +145,7 @@ class Character {
             print("\(characterName!) was never hit")
             return
         }
-        print("\n\(characterName!) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
+        print("\n\(characterName!) the \(characterType) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
         print("That's a \(percentageOfSuccessfullHitsReceived)% success rate")
         print("He/She also gave \(givenHits) hits to his fellow ennemies.")
     }

@@ -16,13 +16,16 @@ class Fight {
     
     
     func initiateFight(withPlayers playersArray: [Player]) {
-        print("\n\nTime to play! Now just press enter to know who the Great Spirit has chosen to play first.")
+        print("\n\n🔮 🔮 🔮 🔮 🔮 🔮 🔮")
+        print("\nTime to play! Now just press enter to know who the Great Spirit 🧞‍♂️ has chosen to play first.")
         
         chooseRandomFirstPlayer(in: playersArray)
         
         while playersArray[0].atLeastOneCharacterInTeamIsAlive == true && playersArray[1].atLeastOneCharacterInTeamIsAlive == true  {
             fightCounter += 1
-            print("\nFight \(fightCounter)")
+            print("\n🏰 🏰 🏰 🏰 🏰 ")
+            print("Fight \(fightCounter)")
+            print("🏰 🏰 🏰 🏰 🏰 ")
             if  playersArray[0].isItPlayersTurn == true {
                 playersArray[0].attack(againstTeam: playersArray[1].team)
                 playersArray[1].team.displayTeamStats(of: playersArray[1].playerName)
@@ -40,10 +43,10 @@ class Fight {
     
     func winner(in playersArray: [Player]) {
         if playersArray[0].atLeastOneCharacterInTeamIsAlive == true {
-            print("\nCongratulations \(playersArray[0].playerName), you have crushed all of your ennemies!")
+            print("\n🔱 Congratulations \(playersArray[0].playerName), you have crushed all of your ennemies!")
             winner = playersArray[0]
         } else {
-            print("\nCongratulations \(playersArray[1].playerName), you have crushed all of your ennemies!")
+            print("\n🔱 Congratulations \(playersArray[1].playerName), you have crushed all of your ennemies!")
             winner = playersArray[1]
         }
         
@@ -73,11 +76,11 @@ class Fight {
         _ = readLine()
         
         if randomNumber == 1 {
-            print("\nThe Great Spirit has chosen you \(playersArray[0].playerName.capitalized), you will start the fight!")
+            print("\n👉 The Great Spirit 🧞‍♂️ has chosen you \(playersArray[0].playerName.capitalized), you will start the fight!")
             playersArray[0].isItPlayersTurn = true
             
         } else {
-            print("\nThe Great Spirit has chosen you \(playersArray[1].playerName.capitalized), you will start the fight!")
+            print("\n👉 The Great Spirit has chosen you \(playersArray[1].playerName.capitalized), you will start the fight!")
             playersArray[1].isItPlayersTurn = true
         }
     }

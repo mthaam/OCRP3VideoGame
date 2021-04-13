@@ -18,10 +18,10 @@ class UserFunctions {
         repeat {
             name = UserFunctions.answerWithText()
             if name.count < 3 {
-                print("\nYour name must have at least 3 letters")
+                print("\n❌ Your name must have at least 3 letters")
             }
             if usedPlayerNames.contains(name) || usedPlayerNames.contains(name.capitalized) {
-                print("\nThis name is already used. Please choose another one.")
+                print("\n❌ This name is already used. Please choose another one.")
             }
         } while name.count < 3 || usedPlayerNames.contains(name) || usedPlayerNames.contains(name.capitalized)
         usedPlayerNames.append(name)
@@ -45,7 +45,7 @@ class UserFunctions {
         repeat {
             rawValue = readLine()
             if rawValue == nil {
-                print("You didn't type anything. Please try again")
+                print("❌ You didn't type anything. Please try again")
             }
         } while rawValue == nil
         
@@ -59,7 +59,7 @@ class UserFunctions {
             if let value = Int(rawValue) {
                 readValue = value
             } else {
-                print("You can only answer with a number")
+                print("❌ You can only answer with a number")
             }
         } while readValue == nil
         
@@ -73,7 +73,7 @@ class UserFunctions {
             if let value = Double(rawValue) {
                 readValue = value
             } else {
-                print("You can only answer with a number")
+                print("❌ You can only answer with a number")
             }
         } while readValue == nil
         

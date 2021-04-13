@@ -28,7 +28,7 @@ class Team {
             var userChoice: Int = 0
             
             
-            userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "Your choice is out of range. Please try again with a choice between 1 and 6")
+            userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "❌ Your choice is out of range. Please try again with a choice between 1 and 6")
             
             switch userChoice {
             case 1:
@@ -73,7 +73,7 @@ class Team {
         guard aliveCharacters.count > 0 else { return }
         print("\nThe remaining characters of \(oppositePlayerName)'s team have the following stats")
         for character in aliveCharacters {
-            print("\(character.characterName!) has \(character.lifePoints)  points of life remaining")
+            print("\(character.characterName!) the \(character.characterType) has \(character.lifePoints)  points of life remaining")
         }
     }
     

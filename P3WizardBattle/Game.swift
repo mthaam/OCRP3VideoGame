@@ -54,7 +54,7 @@ class Game {
     
     private func exitOrNewGame() {
         print("\n\nWhat would you like to do now?\n\n- Enter 1 to start a new game\n\n- Enter 2 to exit game")
-        let choice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "You can only answer with 1 to start a new game, or 2 to exit game. Please try again.")
+        let choice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "❌ You can only answer with 1 to start a new game, or 2 to exit game. Please try again.")
         if choice == 1 {
             playersArray.removeAll()
         } else {
