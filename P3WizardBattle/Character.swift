@@ -9,7 +9,7 @@ import Foundation
 
 class Character {
     
-    var characterName: String!
+    var characterName: String
     var characterType: String
     
     private var _lifePoints: Int = 10
@@ -72,7 +72,7 @@ class Character {
         
         _selectedCharacter.chooseNameForCharacter()
 
-        UserFunctions.usedCharacterNames.append(_selectedCharacter.characterName!)
+        UserFunctions.usedCharacterNames.append(_selectedCharacter.characterName)
         
         newArrayForPlayer.append(_selectedCharacter)
         
@@ -130,9 +130,9 @@ class Character {
             nbrOfSuccessfullHits += 1
             
             if _lifePoints > 0 {
-                print("\n\(self.characterName!.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+                print("\n\(self.characterName.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
             } else {
-                print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName!.capitalized) the \(self.characterType)! ☠️")
+                print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName.capitalized) the \(self.characterType)! ☠️")
             }
         } else {
             print("You missed the target. Maybe next time! 🙀")
@@ -142,10 +142,10 @@ class Character {
     
     func readCharacterStatsAtEndOfGame() {
         guard nbrOfHitReceived > 0 else {
-            print("\(characterName!) was never hit")
+            print("\(characterName) was never hit")
             return
         }
-        print("\n\(characterName!) the \(characterType) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
+        print("\n\(characterName) the \(characterType) was hit \(nbrOfHitReceived) times. \(nbrOfSuccessfullHits) hits were successfull.")
         print("That's a \(percentageOfSuccessfullHitsReceived)% success rate")
         print("He/She also gave \(givenHits) hits to his fellow ennemies.")
     }

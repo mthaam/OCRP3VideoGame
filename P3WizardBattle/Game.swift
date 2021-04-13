@@ -57,6 +57,8 @@ class Game {
         let choice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "❌ You can only answer with 1 to start a new game, or 2 to exit game. Please try again.")
         if choice == 1 {
             playersArray.removeAll()
+            UserFunctions.usedCharacterNames.removeAll()
+            UserFunctions.usedPlayerNames.removeAll()
         } else {
             print("Goodbye! 👋")
             isOver = true

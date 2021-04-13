@@ -46,7 +46,7 @@ class Player {
     func teamReview() {
         print("\n\(playerName.capitalized), Your team now has the following characters")
         for character in team.aliveCharacters {
-            print(" \(character.characterName!) the \(character.characterType)")
+            print(" \(character.characterName) the \(character.characterType)")
         }
     }
         
@@ -79,7 +79,7 @@ class Player {
                 }
                 
             } else {
-                print("\nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName!) has the weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.features)")
+                print("\nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName) has the weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.features)")
                 print("Would you like to keep or change this weapon?")
                 print("Enter 1 to keep - Enter 2 to change")
                 let keepOrChangeWeapon = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage: "❌ You can only choose 1 to keep your character's current weapon, or 2 to keep it. Please try again.")
@@ -98,7 +98,7 @@ class Player {
         opposingTeam.teamDisplay()
         let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage: "❌ The opposing team has just \(opposingTeam.aliveCharacters.count) characters! Try again with a number between 1 and \(opposingTeam.aliveCharacters.count).")
         
-        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName!.capitalized) the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
+        print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName.capitalized) the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
         
         _ = readLine()
         

@@ -9,7 +9,7 @@ import Foundation
 
 class Team {
     
-    var aliveCharacters: [Character]!
+    var aliveCharacters: [Character] = []
     var deadCharacters: [Character] = []
     
     
@@ -56,7 +56,7 @@ class Team {
     
     func teamDisplay() {
         for (index, characterItem) in aliveCharacters.enumerated()  {
-            print("\(index + 1) - \(characterItem.characterName!) the \(characterItem.characterType)")
+            print("\(index + 1) - \(characterItem.characterName) the \(characterItem.characterType)")
         }
     }
     
@@ -73,7 +73,7 @@ class Team {
         guard aliveCharacters.count > 0 else { return }
         print("\nThe remaining characters of \(oppositePlayerName)'s team have the following stats")
         for character in aliveCharacters {
-            print("\(character.characterName!) the \(character.characterType) has \(character.lifePoints)  points of life remaining")
+            print("\(character.characterName) the \(character.characterType) has \(character.lifePoints)  points of life remaining")
         }
     }
     
