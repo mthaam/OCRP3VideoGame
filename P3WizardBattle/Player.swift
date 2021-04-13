@@ -9,7 +9,6 @@ import Foundation
 
 class Player {
     var playerName: String
-    var playerScore: Int = 0
     var team: Team!
     var isItPlayersTurn: Bool = false
     var atLeastOneCharacterInTeamIsAlive: Bool { team.aliveCharacters.count > 0 }
@@ -59,7 +58,7 @@ class Player {
         print("\n\(playerName), choose a character of your Team to attack with.")
         self.team.teamDisplay()
         
-        let characterChoice: Int = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: self.team.aliveCharacters.count, errorMessage: "Your team has just 3 characters! Try again with a number between 1 and 3.")
+        let characterChoice: Int = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: self.team.aliveCharacters.count, errorMessage: "Your team has just \(team.aliveCharacters.count) characters! Try again with a number between 1 and \(team.aliveCharacters.count).")
 
         
         if self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter == nil {
@@ -97,7 +96,7 @@ class Player {
         print("\nNow choose a character to attack")
         print("Choose from the characters of the other player:")
         opposingTeam.teamDisplay()
-        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage: "The opposing team has just 3 characters! Try again with a number between 1 and 3.")
+        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage: "The opposing team has just \(opposingTeam.aliveCharacters.count) characters! Try again with a number between 1 and \(opposingTeam.aliveCharacters.count).")
         
         print("\n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName!.capitalized) the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter.weaponType), press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName!.capitalized) the \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType) ")
         

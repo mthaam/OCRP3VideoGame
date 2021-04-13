@@ -21,11 +21,12 @@ class Team {
         
         var counter: Int = 0
         repeat {
+            counter += 1
+            print("\nPlease choose character \(counter) and press Enter")
+            
             let characterSet: [Character] = Character.displayAvailableCharacters()
             var userChoice: Int = 0
             
-            counter += 1
-            print("\nPlease choose character \(counter) and press Enter")
             
             userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "Your choice is out of range. Please try again with a choice between 1 and 6")
             
