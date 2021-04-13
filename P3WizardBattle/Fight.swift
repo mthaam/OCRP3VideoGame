@@ -17,7 +17,7 @@ class Fight {
     
     func initiateFight(withPlayers playersArray: [Player]) {
         print("\n\n🔮 🔮 🔮 🔮 🔮 🔮 🔮")
-        print("\nTime to play! Now just press enter to know who the Great Spirit 🧞‍♂️ has chosen to play first.")
+        print("\nTime to play! Now just press enter to know who the Great Spirit 🧞‍♂️ has chosen to play first. 🎲 🎲")
         
         chooseRandomFirstPlayer(in: playersArray)
         
