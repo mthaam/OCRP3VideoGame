@@ -59,6 +59,7 @@ class Game {
             playersArray.removeAll()
             UserFunctions.usedCharacterNames.removeAll()
             UserFunctions.usedPlayerNames.removeAll()
+            fight.fightCounter = 0
         } else {
             print("Goodbye! 👋")
             isOver = true
