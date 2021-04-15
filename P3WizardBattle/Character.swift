@@ -67,14 +67,14 @@ class Character {
     }
     
     static func addCharacterAndName(withChoice ofCharacters: Character, in arrayToAppend : [Character]) -> [Character] {
-        let _selectedCharacter: Character = ofCharacters
+        let selectedCharacter: Character = ofCharacters
         var newArrayForPlayer: [Character] = arrayToAppend
         
-        _selectedCharacter.chooseNameForCharacter()
+        selectedCharacter.chooseNameForCharacter()
 
-        UserFunctions.usedCharacterNames.append(_selectedCharacter.characterName)
+        UserFunctions.usedCharacterNames.append(selectedCharacter.characterName)
         
-        newArrayForPlayer.append(_selectedCharacter)
+        newArrayForPlayer.append(selectedCharacter)
         
         return newArrayForPlayer
         

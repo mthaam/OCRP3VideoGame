@@ -12,10 +12,7 @@ class Game {
     var isOver: Bool = false
     var playersArray: [Player] = []
     var fight: Fight = Fight()
-    
-    
-    
-    
+
     func gameManager() {
         while isOver == false {
             launchGame()
@@ -23,7 +20,6 @@ class Game {
             exitOrNewGame()
         }
     }
-    
     
     private func launchGame() {
         print("\n⚔️ Welcome to Wizard Battle! ⚔️")
@@ -45,7 +41,6 @@ class Game {
         }
     }
     
-    
     private func battle() {
         fight.initiateFight(withPlayers: playersArray)
         fight.winner(in: playersArray)
@@ -66,10 +61,4 @@ class Game {
         }
     }
 
-    
-    
-    
-    
-    
-    
 }

@@ -12,7 +12,6 @@ class UserFunctions {
     static var usedPlayerNames: [String] = []
     static var usedCharacterNames: [String] = []
     
-    
     static func askNameForPlayer() -> String {
         var name: String = ""
         repeat {
@@ -33,7 +32,7 @@ class UserFunctions {
         var userChoice: Int
         repeat {
             userChoice = UserFunctions.answerWithIntNumber()
-            if userChoice < minimumChoice || userChoice > maximumChoice  {
+            if userChoice < minimumChoice || userChoice > maximumChoice {
                 print(errorMessage)
             }
         } while userChoice < minimumChoice || userChoice > maximumChoice
@@ -79,8 +78,5 @@ class UserFunctions {
         
         return readValue!
     }
-
-    
-    
     
 }

@@ -18,7 +18,6 @@ class Team {
         var newCharacterSet: [Character] = []
         let newTeam = Team()
         
-        
         var counter: Int = 0
         repeat {
             counter += 1
@@ -26,7 +25,6 @@ class Team {
             
             let characterSet: [Character] = Character.displayAvailableCharacters()
             var userChoice: Int = 0
-            
             
             userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "❌ Your choice is out of range. Please try again with a choice between 1 and 6")
             
@@ -94,7 +92,6 @@ class Team {
             }
         }
     }
-
     
 }
 

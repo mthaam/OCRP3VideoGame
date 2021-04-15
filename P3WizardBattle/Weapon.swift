@@ -11,21 +11,13 @@ class Weapon {
     let weaponType: String
     let weaponDamagePower: Int
     let weaponAccuracy: Double
-    
     var features: String {"\(weaponType) - Power: \(weaponDamagePower) - Accuracy: \(Int(weaponAccuracy * 100.0))%"}
-    
-    
-    
-    
-    
+
     init(newWeaponType: String, newWeaponDamagePower: Int, newWeaponAccuracy: Double = 1.0) {
         self.weaponType = newWeaponType
         self.weaponDamagePower = newWeaponDamagePower
         self.weaponAccuracy = newWeaponAccuracy
-        
     }
-    
-    
     
     static func createWeaponSet() -> [Weapon] {
         let sword = Weapon(newWeaponType: "Sword 🗡", newWeaponDamagePower: 3, newWeaponAccuracy: 0.72)
@@ -46,7 +38,6 @@ class Weapon {
          lifePointsToBeLost = weaponDamagePower
         }
         return lifePointsToBeLost
-        
     }
     
     static func chestRandomWeaponGenerator() -> Weapon {
@@ -62,8 +53,5 @@ class Weapon {
         
         return magicWeaponSet[randomIndexGenerator]
     }
-    
-    
 
-    
 }
