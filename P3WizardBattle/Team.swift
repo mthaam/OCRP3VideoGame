@@ -8,11 +8,22 @@
 
 import Foundation
 
+/// This class creates a team, whic consist in 2 arrays ;
+/// One for alive characters, One for dead characters.
 class Team {
 
     var aliveCharacters: [Character] = []
     var deadCharacters: [Character] = []
 
+    /// This function lets player choose characters for his team.
+    /// It returns an instance of type Team.
+    /// - First an empty Character array and a Team instance  are declared.
+    /// - Then, code within repeat - while is repeated while .count of Character array < 3.
+    /// - Each time loop is processed, a new array of available Characters is created with displayAvailableCharacters()
+    /// - Player then chooses a player with setChoice(), which returns an Int value.
+    /// - The Int value serves as an index reference used in switch statement and
+    /// - Character.addCharacterAndName() is called for each switch case.
+    /// - Last step is to make aliveCharacters = newCharacterSet.
     static func chooseCharactersForPlayersTeam() -> Team {
 
         var newCharacterSet: [Character] = []
@@ -52,12 +63,17 @@ class Team {
         return newTeam
     }
 
+    /// This function is called in attack() from class Player.
+    /// Either it displays available characters still alive to perform an attack,
+    /// or it displays available characters still alive to be attacked.
     func teamDisplay() {
         for (index, characterItem) in aliveCharacters.enumerated() {
             print("\(index + 1) - \(characterItem.characterName) the \(characterItem.characterType)")
         }
     }
 
+    /// This function removes dead characters from aliveCharacters array
+    /// to deadCharacters array.
     func isThereACharacterToRemoveFromAliveTeam() {
         for (index, character) in aliveCharacters.enumerated() where character.isAlive == false {
             deadCharacters.append(character)
@@ -65,6 +81,9 @@ class Team {
         }
     }
 
+    /// This function is called after a character is hit, as a brief reminder of basic life stats of the attacked team.
+    /// - Note that guard statement prevents this function to be executed if all characters in a team are dead,
+    /// e.g. at the last fight before displaying final stats.
     func displayTeamStats(of oppositePlayerName: String) {
         guard aliveCharacters.count > 0 else { return }
         print("\nThe remaining characters of \(oppositePlayerName)'s team have the following stats")
@@ -73,6 +92,10 @@ class Team {
         }
     }
 
+    /// This function is called to display stats when a fight is over
+    /// (whenever all characters of a team are dead).
+    /// - readCharacterStatsAtEndOfGame() is called for each character,
+    /// either in aliveCharacters or deadCharacters arrays.
     func displayFinalTeamStats() {
         if aliveCharacters.count > 0 {
             print("\nYou had \(aliveCharacters.count) who survived 💪 :")
