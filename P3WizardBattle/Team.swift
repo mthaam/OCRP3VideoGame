@@ -8,25 +8,25 @@
 import Foundation
 
 class Team {
-
+    
     var aliveCharacters: [Character] = []
     var deadCharacters: [Character] = []
-
+    
     static func chooseCharactersForPlayersTeam() -> Team {
-
+        
         var newCharacterSet: [Character] = []
         let newTeam = Team()
-
+        
         var counter: Int = 0
         repeat {
             counter += 1
             print("\nPlease choose character \(counter) and press Enter")
-
+            
             let characterSet: [Character] = Character.displayAvailableCharacters()
             var userChoice: Int = 0
-
+            
             userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "❌ Your choice is out of range. Please try again with a choice between 1 and 6")
-
+            
             switch userChoice {
             case 1:
                 newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[0], in: newCharacterSet)
@@ -43,27 +43,27 @@ class Team {
             default:
                 break
             }
-
+            
         } while newCharacterSet.count < 3
-
+        
         newTeam.aliveCharacters = newCharacterSet
-
+        
         return newTeam
     }
-
+    
     func teamDisplay() {
         for (index, characterItem) in aliveCharacters.enumerated() {
             print("\(index + 1) - \(characterItem.characterName) the \(characterItem.characterType)")
         }
     }
-
+    
     func isThereACharacterToRemoveFromAliveTeam() {
         for (index, character) in aliveCharacters.enumerated() where character.isAlive == false {
-                deadCharacters.append(character)
-                aliveCharacters.remove(at: index)
+            deadCharacters.append(character)
+            aliveCharacters.remove(at: index)
         }
     }
-
+    
     func displayTeamStats(of oppositePlayerName: String) {
         guard aliveCharacters.count > 0 else { return }
         print("\nThe remaining characters of \(oppositePlayerName)'s team have the following stats")
@@ -71,7 +71,7 @@ class Team {
             print("\(character.characterName) the \(character.characterType) has \(character.lifePoints)  points of life remaining")
         }
     }
-
+    
     func displayFinalTeamStats() {
         if aliveCharacters.count > 0 {
             print("\nYou had \(aliveCharacters.count) who survived 💪 :")
@@ -89,5 +89,5 @@ class Team {
             }
         }
     }
-
+    
 }
