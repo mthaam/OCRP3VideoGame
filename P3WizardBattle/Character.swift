@@ -4,9 +4,14 @@
 //
 //  Created by JEAN SEBASTIEN BRUNET on 18/3/21.
 //
+// swiftlint:disable all
 
 import Foundation
-
+/// This Class defines properties of a character, such as name, type, life points.
+/// It also has static functions that are used to create character objects in other classes.
+/// It also has functions that modifies object properties.
+/// - Note that property Weapon is an implicitly unwrapped optional on purpose,
+/// because this property is never called being nil.
 class Character {
 
     var characterName: String
@@ -39,6 +44,8 @@ class Character {
         self.characterType = newCharacterType
     }
 
+    /// This function returns an array of Character objects.
+    /// - When called, this function displays to a player the available characters in the returned array.
     static func displayAvailableCharacters() -> [Character] {
 
         let warrior = Character(newCharacterName: "", newCharacterType: "Warrior 🥷")
@@ -59,6 +66,11 @@ class Character {
         return characterArray
     }
 
+    /// This function returns a character, previously chosen in the returned array of displayAvailableCharacters.
+    ///  It is used to choose a character and choose a name for selected Character.
+    /// - Parameter ofCharacters : receives a specific Character.
+    /// - Parameter arrayToAppend : receives an array to append, used in class Team.
+    /// - chooseNameForCharacter() is applied to selected character before being appened to the returned array.
     static func addCharacterAndName(withChoice ofCharacters: Character, in arrayToAppend: [Character]) -> [Character] {
         let selectedCharacter: Character = ofCharacters
         var newArrayForPlayer: [Character] = arrayToAppend
@@ -73,6 +85,11 @@ class Character {
 
     }
 
+    /// This function modifies the name of a Character, and controls that
+    /// the chosen name has not been previously used for amother character.
+    /// - To do so, the name in String type is appended to a static array in class UserFunctions.
+    /// Note that the chosen name is appended twice, to prevent control fail if name is typed by
+    /// user capitalized or uncapitalized.
     func chooseNameForCharacter() {
         var newCharacterName: String = ""
 
@@ -95,6 +112,9 @@ class Character {
 
     }
 
+    /// This function uses a switch statement to change weapon var of a character.
+    /// - Parameter choice : an Int value which is an index in an array of Weapons.
+    /// - Parameter weaponSet : an array of Weapons in which the desired weapon is chosen.
     func changeWeapon(with choice: Int, in weaponSet: [Weapon]) {
         switch choice {
         case 1:
@@ -113,6 +133,13 @@ class Character {
 
     }
 
+    /// This function removes life points to a character.
+    /// - Parameter playername : a  String value used in a print in case of sucessfull hit.
+    /// - Parameter character : Receives a character, who performs the attack.
+    /// - First life points to be removed are generated with weaponOfCharacter.generateWeaponDamage()
+    /// - If points generated are > or = to weapon's damage power, the hit is successfull
+    /// and points can be removed.
+    /// - Else the hit is unsuccessfull.
     func receiveHit(by playerName: String, from character: Character) {
         let lifePointsToRemove = character.weaponOfCharacter.generateWeaponDamage()
         nbrOfHitReceived += 1
@@ -130,6 +157,8 @@ class Character {
         }
     }
 
+    /// This function reads character stats a the end of Game.
+    /// - Note that guard statement is used here to avoid a division by 0 error.
     func readCharacterStatsAtEndOfGame() {
         guard nbrOfHitReceived > 0 else {
             print("\(characterName) was never hit")
@@ -140,10 +169,13 @@ class Character {
         print("He/She also gave \(givenHits) hits to his fellow ennemies.")
     }
 
+    /// This functions increments var givenHits, later red in final stats.
     func incrementGivenHits() {
         givenHits += 1
     }
 
+    /// This function generates a random weapon, and changes weapon of Character.
+    /// - The randomly generated weapon is created by Weapon.chestRandomWeaponGenerator()
     func changeWeaponWithMagicChestWeapon() {
         let randomlyGeneratedWeapon: Weapon = Weapon.chestRandomWeaponGenerator()
         if randomlyGeneratedWeapon.weaponDamagePower < weaponOfCharacter.weaponDamagePower {
