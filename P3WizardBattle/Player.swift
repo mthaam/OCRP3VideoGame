@@ -71,7 +71,7 @@ class Player {
     /// - isThereACharacterToRemoveFromAliveTeam() is called to remove any character from opponent's aliveTeam.
     /// - isItPlayersTurn is toggled.
     func attack(againstTeam opposingTeam: Team ) {
-        let randomlyGeneratedChestOpeningKey: Int = Int.random(in: 1...10)
+        let randomlyGeneratedChestOpeningKey: Int = Int.random(in: 1...8)
         var temporaryWeaponSaver: Weapon!
 
         print("\n\(playerName), choose a character of your Team to attack with.")
@@ -99,13 +99,13 @@ class Player {
                 if chooseToUseChest == 1 {
                     self.team.aliveCharacters[characterChoice - 1].changeWeaponWithMagicChestWeapon()
                 } else {
-                    print("\nOK \(playerName), you're not a gambler!")
+                    print("\nOK \(playerName), you're not a gambler! Your character will attack with last used weapon.")
                 }
 
             } else {
                 print(
                     """
-                    \nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName)\
+                    \nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName) \
                     has the weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.features)
                     """)
                 print("Would you like to keep or change this weapon?")
@@ -135,7 +135,7 @@ class Player {
         """
         \n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName.capitalized)\
         the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter.weaponType),\
-        press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName.capitalized) the\
+        press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName.capitalized) the \
         \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType)
         """)
 
@@ -167,7 +167,7 @@ class Player {
         let availableWeapons: [Weapon] = Weapon.createWeaponSet()
         var counter = 0
         print("\n⁉️ Weapon power is the ability for a weapon to remove lifepoints to an ennemy.\nThe accuracy is the abilty for a weapon to actually hit the ennemy.")
-        print("The more powerful the weapon, the less accurate it will be.")
+        print("The more powerful the weapon, the less accurate.")
         for weaponItem in availableWeapons {
             counter += 1
             print("\(counter) - \(weaponItem.features)")
