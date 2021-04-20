@@ -14,7 +14,7 @@ import Foundation
 /// - weaponDamagePower is an Int value used to remove points of life to the hit Character.
 /// - weaponAccuracy is a Double value, representing a percentage of accuracy of a weapon.
 /// The higher the value, the greater chances to hit successfully a Character.
-class Weapon {
+final class Weapon {
     let weaponType: String
     let weaponDamagePower: Int
     let weaponAccuracy: Double

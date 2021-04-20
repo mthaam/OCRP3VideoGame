@@ -9,7 +9,7 @@
 import Foundation
 
 /// This class manages the whole game through 3 properties and one main function : gameManager
-class Game {
+final class Game {
 
     var isOver: Bool = false
     var playersArray: [Player] = []
@@ -45,6 +45,11 @@ class Game {
 
         for player in playersArray {
             player.teamReview()
+            print(
+                """
+                ================================
+
+                """)
         }
     }
 

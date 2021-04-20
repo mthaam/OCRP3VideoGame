@@ -10,7 +10,7 @@ import Foundation
 
 /// This class creates a team, whic consist in 2 arrays ;
 /// One for alive characters, One for dead characters.
-class Team {
+final class Team {
 
     var aliveCharacters: [Character] = []
     var deadCharacters: [Character] = []
@@ -88,7 +88,7 @@ class Team {
         guard aliveCharacters.count > 0 else { return }
         print("\nThe remaining characters of \(oppositePlayerName)'s team have the following stats")
         for character in aliveCharacters {
-            print("\(character.characterName) the \(character.characterType) has \(character.lifePoints)  points of life remaining")
+            print("\(character.characterName) the \(character.characterType) has \(character.lifePoints)/10  points of life remaining")
         }
     }
 

@@ -9,7 +9,7 @@ import Foundation
 
 /// This class is used as a toolbox of reccuring functions, used in every other classes.
 /// There are also 2 static var, used to store already used names, for players or characters.
-class UserFunctions {
+final class UserFunctions {
 
     static var usedPlayerNames: [String] = []
     static var usedCharacterNames: [String] = []

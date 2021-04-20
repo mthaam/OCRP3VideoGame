@@ -13,7 +13,7 @@ import Foundation
 /// - Note that property Weapon is an optional type,
 /// because at the beginning of the game, a character has no weapon.
 /// It must be selected by player to engage fight.
-class Character {
+final class Character {
 
     var characterName: String
     var characterType: String
@@ -152,12 +152,13 @@ class Character {
             nbrOfSuccessfullHits += 1
 
             if _lifePoints > 0 {
-                print("\n\(self.characterName.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+                print("\n👑 Congratulations! The hit was successfull!")
+                print("\(self.characterName.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
             } else {
                 print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName.capitalized) the \(self.characterType)! ☠️")
             }
         } else {
-            print("You missed the target. Maybe next time! 🙀")
+            print("🙀 You missed the target. Maybe next time! 🙀")
         }
     }
 

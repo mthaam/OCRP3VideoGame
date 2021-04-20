@@ -11,7 +11,7 @@ import Foundation
 /// class Player represents a user with 2 key properties : playerName and team
 /// - Other properties isItPlayersTurn, atLeastOneCharacterInTeamIsAlive are used in class fight.
 /// - private let immutableChestLockKey is only used in attack()
-class Player {
+final class Player {
     var playerName: String
     var team: Team = Team()
     var isItPlayersTurn: Bool = false
@@ -43,6 +43,11 @@ class Player {
         print("\n\nPlease choose characters for player \(playerName.capitalized)")
         team = Team.chooseCharactersForPlayersTeam()
         print("\nCongratulations \(playerName.capitalized), your team is all set! 👍")
+        print(
+            """
+            =========================================================================
+
+            """)
     }
 
     /// Reviews what character and its name in player's team.
