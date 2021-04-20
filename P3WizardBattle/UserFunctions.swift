@@ -15,10 +15,10 @@ class UserFunctions {
     static var usedCharacterNames: [String] = []
 
     /// This function returns a String value.
-    /// - It is used at game initialization, and also control that name entered after answerWithText()
+    /// - It is used at game initialization, and also controls that name entered after answerWithText()
     /// is not contained in static var [usedPlayerNames].
     /// - Once the program exits repeat - while loop (the conditions are met),
-    /// the chosen name is appended to static var [usedPlayerNames], and then name is returned.
+    /// the chosen name is appended to static var [usedPlayerNames], and then chosen name is returned.
     static func askNameForPlayer() -> String {
         var name: String = ""
         repeat {

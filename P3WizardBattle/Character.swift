@@ -10,8 +10,9 @@ import Foundation
 /// This Class defines properties of a character, such as name, type, life points.
 /// It also has static functions that are used to create character objects in other classes.
 /// It also has functions that modifies object properties.
-/// - Note that property Weapon is an implicitly unwrapped optional on purpose,
-/// because this property is never called being nil.
+/// - Note that property Weapon is an optional type,
+/// because at the beginning of the game, a character has no weapon.
+/// It must be selected by player to engage fight.
 class Character {
 
     var characterName: String
@@ -23,7 +24,7 @@ class Character {
     }
 
     var isAlive: Bool { lifePoints > 0 }
-    var weaponOfCharacter: Weapon!
+    var weaponOfCharacter: Weapon?
 
     private var _nbrOfHitReceived = 0
     var nbrOfHitReceived: Int { get { _nbrOfHitReceived }
@@ -141,9 +142,12 @@ class Character {
     /// and points can be removed.
     /// - Else the hit is unsuccessfull.
     func receiveHit(by playerName: String, from character: Character) {
-        let lifePointsToRemove = character.weaponOfCharacter.generateWeaponDamage()
+        var lifePointsToRemove: Int = 0
+        if let weapon = character.weaponOfCharacter {
+            lifePointsToRemove = weapon.generateWeaponDamage()
+        }
         nbrOfHitReceived += 1
-        if lifePointsToRemove >= character.weaponOfCharacter.weaponDamagePower {
+        if lifePointsToRemove >= character.weaponOfCharacter!.weaponDamagePower {
             lifePoints -= min(lifePointsToRemove, lifePoints)
             nbrOfSuccessfullHits += 1
 
@@ -178,7 +182,7 @@ class Character {
     /// - The randomly generated weapon is created by Weapon.chestRandomWeaponGenerator()
     func changeWeaponWithMagicChestWeapon() {
         let randomlyGeneratedWeapon: Weapon = Weapon.chestRandomWeaponGenerator()
-        if randomlyGeneratedWeapon.weaponDamagePower < weaponOfCharacter.weaponDamagePower {
+        if randomlyGeneratedWeapon.weaponDamagePower < weaponOfCharacter!.weaponDamagePower {
             print("\nBad luck! 🥀 The chest contains a less powerful weapon!")
         } else {
             print("\nThis is your lucky day! 🍀 The chest contains a more powerful weapon!")

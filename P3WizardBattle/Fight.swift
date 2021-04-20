@@ -10,7 +10,7 @@ import Foundation
 
 /// This class manages a fight, consisting in a sucession of attacks one player after the other.
 /// - Note that var winner is an implicitly unwrapped optional on purpose.
-/// var winner is indeed called only if there's one.
+/// var winner is indeed called only if there's one, so it's safe to call it unwrapped.
 class Fight {
 
     var winner: Player!

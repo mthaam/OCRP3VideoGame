@@ -133,8 +133,8 @@ class Player {
         """)
         print(
         """
-        \n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName.capitalized)\
-        the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter.weaponType),\
+        \n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName.capitalized) \
+        the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.weaponType), \
         press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName.capitalized) the \
         \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType)
         """)
