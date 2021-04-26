@@ -13,7 +13,7 @@ import Foundation
 /// var winner is indeed called only if there's one, so it's safe to call it unwrapped.
 final class Fight {
 
-    var winner: Player!
+    var winner: Player?
     var fightCounter: Int = 0
 
     /// This function makes players fight with their respective teams.
@@ -56,7 +56,6 @@ final class Fight {
             print("\n🔱 Congratulations \(playersArray[1].playerName), you have crushed all of your ennemies!")
             winner = playersArray[1]
         }
-
     }
 
     /// This functions displays final stats.
@@ -66,7 +65,9 @@ final class Fight {
     func displayBattleFinalStats(in playersArray: [Player]) {
         print("\n\nThe total number of runs is \(fightCounter)")
 
-        print("\n\n   🏆 🏆 🏆 🏆 🏆\n\n   The winner is \(winner!.playerName)\n\n   🏆 🏆 🏆 🏆 🏆")
+        if let winner2 = self.winner {
+            print("\n\n   🏆 🏆 🏆 🏆 🏆\n\n   The winner is \(winner2.playerName)\n\n   🏆 🏆 🏆 🏆 🏆")
+        }
 
         print("\n\nNow lets review each team's statistics :")
 
@@ -76,7 +77,6 @@ final class Fight {
         }
 
         print("\n\n Well done players!")
-
     }
 
     /// This function chooses a random first player in the array of players called.

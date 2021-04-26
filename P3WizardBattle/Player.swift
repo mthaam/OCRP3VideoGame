@@ -65,8 +65,6 @@ final class Player {
     ///
     /// - teamDisplay is called to show player what characters are available in his team to attack with.
     /// - Each time a player attacks, a key is randomly generated to open a chest.
-    /// - Note that var temporaryWeaponSaver is an implicitly unwrapped optional on purpose.
-    /// It's called only once, and only if != nil.
     /// - A character is chosen to perform the attack.
     /// - The chosen character is equiped with a weapon if he doesn't have one,
     /// or it can also randomly access to the chest if randomly generated key matches chest lock and choose to use it or not,
@@ -77,89 +75,123 @@ final class Player {
     /// - isItPlayersTurn is toggled.
     func attack(againstTeam opposingTeam: Team ) {
         let randomlyGeneratedChestOpeningKey: Int = Int.random(in: 1...8)
-        var temporaryWeaponSaver: Weapon!
-
         print("\n\(playerName), choose a character of your Team to attack with.")
         self.team.teamDisplay()
+        let characterChoice: Int = chooseAttackingCharacter()
+        if self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter == nil {
+            print("\n🔫 🔪 🪓 Now it's time to choose a weapon for this character. Please select a weapon in the list below:")
+            displayWeaponSetAndChooseAWeapon(withSelected: characterChoice)
+        } else {
+            if immutableChestLockKey == randomlyGeneratedChestOpeningKey {
+                presentChest(with: characterChoice)
+            } else {
+                if let weapon = self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter { useANewWeaponOrNot(with: characterChoice, currentWeapon: weapon) }
+            }
+        }
+        print("\nNow choose a character to attack")
+        print("Choose from the characters of the other player:")
+        opposingTeam.teamDisplay()
+        let choiceOfCharacterToAttack = chooseAttackedCharacter(in: opposingTeam)
+        displayAttackSumUp(with: characterChoice, against: choiceOfCharacterToAttack, opposingTeam: opposingTeam)
+        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[characterChoice - 1])
+        team.aliveCharacters[characterChoice - 1].incrementGivenHits()
+        if let savedWeapon = self.team.aliveCharacters[characterChoice - 1].temporaryWeaponSaver { rearmCharacterWithPreviousWeapon(with: characterChoice, savedWeapon: savedWeapon) }
+        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
+        isItPlayersTurn.toggle()
+    }
 
+    /// This function returns an Int value and comes as support to attack() function
+    /// The returned value represents an index used in an array.
+    private func chooseAttackedCharacter(in opposingTeam: Team) -> Int {
+        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage:
+                                                                    """
+        ❌ The opposing team has just \(opposingTeam.aliveCharacters.count) characters!\
+        Try again with a number between 1 and \(opposingTeam.aliveCharacters.count).
+        """)
+        return choiceOfCharacterToAttack
+    }
+
+    /// This function returns an Int value and comes as support to attack() function
+    /// The returned value represents an index used in an array.
+    private func chooseAttackingCharacter() -> Int {
         let characterChoice: Int = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: self.team.aliveCharacters.count, errorMessage:
         """
         ❌ Your team has just \(team.aliveCharacters.count) characters! Try again with a number between 1 and \(team.aliveCharacters.count).
         """)
+        return characterChoice
+    }
 
-        if self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter == nil {
-            print("\n🔫 🔪 🪓 Now it's time to choose a weapon for this character. Please select a weapon in the list below:")
-            displayWeaponSetAndChooseAWeapon(withSelected: characterChoice)
-
-        } else {
-            if immutableChestLockKey == randomlyGeneratedChestOpeningKey {
-                temporaryWeaponSaver = self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter
-                print("\n⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ \nThe Great Spirit 🧞‍♂️ just sent a ligthning, and it happened to strike just in front of you. Look \(playerName), a magic chest appearead! 🧰")
-                print("It contains a new weapon, but you can't know in advance if it's more or less powerful and accurate than your character's current weapon.")
-                print("\nWould you like to use this weapon?\n- Enter 1 to use it\n- Enter 2 to keep your character's current weapon")
-                let chooseToUseChest = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage:
-                """
-                ❌ You can only choose 1 to use the new weapon in chest, or 2 to keep your character's current weapon.
-                """)
-                if chooseToUseChest == 1 {
-                    self.team.aliveCharacters[characterChoice - 1].changeWeaponWithMagicChestWeapon()
-                } else {
-                    print("\nOK \(playerName), you're not a gambler! Your character will attack with last used weapon.")
-                }
-
-            } else {
-                print(
-                    """
-                    \nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName) \
-                    has the weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.features)
-                    """)
-                print("Would you like to keep or change this weapon?")
-                print("Enter 1 to keep - Enter 2 to change")
-                let keepOrChangeWeapon = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage:
-                """
-                ❌ You can only choose 1 to keep your character's current weapon, or 2 to keep it. Please try again.
-                """)
-                if keepOrChangeWeapon == 1 {
-                    print("\nOK \(playerName)!")
-                } else {
-                    print("\nPlease select a new weapon in the list below:")
-                    displayWeaponSetAndChooseAWeapon(withSelected: characterChoice)
-                }
-            }
-        }
-
-        print("\nNow choose a character to attack")
-        print("Choose from the characters of the other player:")
-        opposingTeam.teamDisplay()
-        let choiceOfCharacterToAttack = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: opposingTeam.aliveCharacters.count, errorMessage:
-        """
-        ❌ The opposing team has just \(opposingTeam.aliveCharacters.count) characters!\
-        Try again with a number between 1 and \(opposingTeam.aliveCharacters.count).
-        """)
+    /// This function comes as support to attack() function
+    /// - Parameter characterChoice : an Int value representing an index in an array.
+    /// - Parameter savedWeapon: a weapon object used to change weapon of attacking character in case the chest appears.
+    private func rearmCharacterWithPreviousWeapon(with characterChoice: Int, savedWeapon: Weapon) {
         print(
-        """
-        \n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName.capitalized) \
-        the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter!.weaponType), \
-        press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName.capitalized) the \
-        \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType)
-        """)
+            """
+            \n⚠️ Just so you know \(playerName.capitalized), your character got back the weapon he had before opening the chest.\
+            Next time you attack with him, he will use \(savedWeapon.features) unless you choose another weapon.
+            """)
+        self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter = savedWeapon
+        self.team.aliveCharacters[characterChoice - 1].temporaryWeaponSaver = nil
+    }
 
-        _ = readLine()
-
-        opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].receiveHit(by: playerName, from: team.aliveCharacters[characterChoice - 1])
-        team.aliveCharacters[characterChoice - 1].incrementGivenHits()
-
-        if temporaryWeaponSaver != nil {
+    /// This function comes as support to attack() function
+    /// - Parameter characterChoice : an Int value representing an index in an array.
+    /// - Parameter choiceOfCharacterToAttack: an Int value representing an index in an array.
+    /// - Parameter opposingTeam: a team object used to display attacked character name and type.
+    private func displayAttackSumUp(with characterChoice: Int, against choiceOfCharacterToAttack: Int, opposingTeam: Team) {
+        if let weapon = self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter {
             print(
                 """
-                \n⚠️ Just so you know \(playerName.capitalized), your character got back the weapon he had before opening the chest.\
-                Next time you attack with him, he will use \(temporaryWeaponSaver.features) unless you choose another weapon.
-                """)
-            self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter = temporaryWeaponSaver
+            \n\(playerName.capitalized), you are now ready to attack with \(self.team.aliveCharacters[characterChoice - 1].characterName.capitalized) \
+            the \(self.team.aliveCharacters[characterChoice - 1].characterType) and his weapon \(weapon.weaponType), \
+            press enter to hit \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterName.capitalized) the \
+            \(opposingTeam.aliveCharacters[choiceOfCharacterToAttack - 1].characterType)
+            """)
         }
-        opposingTeam.isThereACharacterToRemoveFromAliveTeam()
-        isItPlayersTurn.toggle()
+        _ = readLine()
+    }
 
+    /// This function comes as support to attack() function
+    /// - Parameter characterChoice : an Int value representing an index in an array.
+    /// - Parameter currentWeapon: a weapon object used to change weapon of attacking character .
+    private func useANewWeaponOrNot(with characterChoice: Int, currentWeapon: Weapon) {
+        print(
+            """
+            \nYour selected character \(self.team.aliveCharacters[characterChoice - 1].characterName) \
+            has the weapon \(currentWeapon.features)
+            """)
+        print("Would you like to keep or change this weapon?")
+        print("Enter 1 to keep - Enter 2 to change")
+        let keepOrChangeWeapon = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage:
+                                                            """
+        ❌ You can only choose 1 to keep your character's current weapon, or 2 to keep it. Please try again.
+        """)
+        if keepOrChangeWeapon == 1 {
+            print("\nOK \(playerName)!")
+        } else {
+            print("\nPlease select a new weapon in the list below:")
+            displayWeaponSetAndChooseAWeapon(withSelected: characterChoice)
+        }
+    }
+
+    /// This function comes as support to attack() function
+    /// It lets player choose to use the weapon contained in chest if presented.
+    /// - Parameter characterChoice : an Int value representing an index in an array.
+    private func presentChest(with characterChoice: Int) {
+        self.team.aliveCharacters[characterChoice - 1].temporaryWeaponSaver = self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter
+        print("\n⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ ⚡️ \nThe Great Spirit 🧞‍♂️ just sent a ligthning, and it happened to strike just in front of you. Look \(playerName), a magic chest appearead! 🧰")
+        print("It contains a new weapon, but you can't know in advance if it's more or less powerful and accurate than your character's current weapon.")
+        print("\nWould you like to use this weapon?\n- Enter 1 to use it\n- Enter 2 to keep your character's current weapon")
+        let chooseToUseChest = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 2, errorMessage:
+        """
+        ❌ You can only choose 1 to use the new weapon in chest, or 2 to keep your character's current weapon.
+        """)
+        if chooseToUseChest == 1 {
+            self.team.aliveCharacters[characterChoice - 1].temporaryWeaponSaver = self.team.aliveCharacters[characterChoice - 1].weaponOfCharacter
+            self.team.aliveCharacters[characterChoice - 1].changeWeaponWithMagicChestWeapon()
+        } else {
+            print("\nOK \(playerName), you're not a gambler! Your character will attack with last used weapon.")
+        }
     }
 
     /// Displays to user the available weapon to perform an attack, receives as param. an Int value.

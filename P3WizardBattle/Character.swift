@@ -25,6 +25,7 @@ final class Character {
 
     var isAlive: Bool { lifePoints > 0 }
     var weaponOfCharacter: Weapon?
+    var temporaryWeaponSaver: Weapon?
 
     private var _nbrOfHitReceived = 0
     var nbrOfHitReceived: Int { get { _nbrOfHitReceived }
@@ -146,19 +147,23 @@ final class Character {
         if let weapon = character.weaponOfCharacter {
             lifePointsToRemove = weapon.generateWeaponDamage()
         }
+        
         nbrOfHitReceived += 1
-        if lifePointsToRemove >= character.weaponOfCharacter!.weaponDamagePower {
-            lifePoints -= min(lifePointsToRemove, lifePoints)
-            nbrOfSuccessfullHits += 1
+        
+        if let weapon = character.weaponOfCharacter {
+            if lifePointsToRemove >= weapon.weaponDamagePower {
+                lifePoints -= min(lifePointsToRemove, lifePoints)
+                nbrOfSuccessfullHits += 1
 
-            if _lifePoints > 0 {
-                print("\n👑 Congratulations! The hit was successfull!")
-                print("\(self.characterName.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+                if _lifePoints > 0 {
+                    print("\n👑 Congratulations! The hit was successfull!")
+                    print("\(self.characterName.capitalized) the \(self.characterType) now has \(lifePoints) points of life")
+                } else {
+                    print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName.capitalized) the \(self.characterType)! ☠️")
+                }
             } else {
-                print("\n👏 Good job \(playerName)! 👍 You just killed \(self.characterName.capitalized) the \(self.characterType)! ☠️")
+                print("🙀 You missed the target. Maybe next time! 🙀")
             }
-        } else {
-            print("🙀 You missed the target. Maybe next time! 🙀")
         }
     }
 
@@ -183,10 +188,12 @@ final class Character {
     /// - The randomly generated weapon is created by Weapon.chestRandomWeaponGenerator()
     func changeWeaponWithMagicChestWeapon() {
         let randomlyGeneratedWeapon: Weapon = Weapon.chestRandomWeaponGenerator()
-        if randomlyGeneratedWeapon.weaponDamagePower < weaponOfCharacter!.weaponDamagePower {
-            print("\nBad luck! 🥀 The chest contains a less powerful weapon!")
-        } else {
-            print("\nThis is your lucky day! 🍀 The chest contains a more powerful weapon!")
+        if let currentWeapon = weaponOfCharacter {
+            if randomlyGeneratedWeapon.weaponDamagePower < currentWeapon.weaponDamagePower {
+                print("\nBad luck! 🥀 The chest contains a less powerful weapon!")
+            } else {
+                print("\nThis is your lucky day! 🍀 The chest contains a more powerful weapon!")
+            }
         }
         weaponOfCharacter = randomlyGeneratedWeapon
     }

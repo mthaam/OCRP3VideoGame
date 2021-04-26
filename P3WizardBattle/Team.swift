@@ -25,42 +25,45 @@ final class Team {
     /// - Character.addCharacterAndName() is called for each switch case.
     /// - Last step is to make aliveCharacters = newCharacterSet.
     static func chooseCharactersForPlayersTeam() -> Team {
-
         var newCharacterSet: [Character] = []
         let newTeam = Team()
-
+        
         var counter: Int = 0
         repeat {
             counter += 1
-            print("\nPlease choose character \(counter) and press Enter")
-
-            let characterSet: [Character] = Character.displayAvailableCharacters()
-            var userChoice: Int = 0
-
-            userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "❌ Your choice is out of range. Please try again with a choice between 1 and 6")
-
-            switch userChoice {
-            case 1:
-                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[0], in: newCharacterSet)
-            case 2:
-                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[1], in: newCharacterSet)
-            case 3:
-                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[2], in: newCharacterSet)
-            case 4:
-                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[3], in: newCharacterSet)
-            case 5:
-                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[4], in: newCharacterSet)
-            case 6:
-                newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[5], in: newCharacterSet)
-            default:
-                break
-            }
-
+            newCharacterSet = Team.appendNewCharacterSet(counter: counter, with: newCharacterSet)
         } while newCharacterSet.count < 3
-
         newTeam.aliveCharacters = newCharacterSet
-
         return newTeam
+    }
+
+    /// This function returns a Character array
+    /// It comes as support to static function chooseCharactersForPlayersTeam()
+    /// - Parameter counter: an Int value
+    /// - Parameter newCharacterSet: an array of Character objects, used to append new characters objects in.
+    private static func appendNewCharacterSet(counter: Int, with newCharacterSet: [Character]) -> [Character] {
+        var newCharacterSet: [Character] = newCharacterSet
+        print("\nPlease choose character \(counter) and press Enter")
+        let characterSet: [Character] = Character.displayAvailableCharacters()
+        var userChoice: Int = 0
+        userChoice = UserFunctions.setChoice(minimumChoice: 1, maximumChoice: 6, errorMessage: "❌ Your choice is out of range. Please try again with a choice between 1 and 6")
+        switch userChoice {
+        case 1:
+            newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[0], in: newCharacterSet)
+        case 2:
+            newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[1], in: newCharacterSet)
+        case 3:
+            newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[2], in: newCharacterSet)
+        case 4:
+            newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[3], in: newCharacterSet)
+        case 5:
+            newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[4], in: newCharacterSet)
+        case 6:
+            newCharacterSet = Character.addCharacterAndName(withChoice: characterSet[5], in: newCharacterSet)
+        default:
+            break
+        }
+        return newCharacterSet
     }
 
     /// This function is called in attack() from class Player.
