@@ -7,5 +7,10 @@
 
 import Foundation
 
-var game = Game()
-game.gameManager()
+@main
+class Main {
+    static func main() {
+        let game = Game()
+        game.gameManager()
+    }
+}

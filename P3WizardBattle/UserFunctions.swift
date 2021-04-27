@@ -4,6 +4,7 @@
 //
 //  Created by JEAN SEBASTIEN BRUNET on 23/3/21.
 //
+// swiftlint:disable all
 
 import Foundation
 
@@ -54,8 +55,6 @@ final class UserFunctions {
     /// This function returns a String value.
     /// - It is used to interact with a user, who can reply with any string value after readline()
     /// - Note that readLine() function is repeated while rawValue == nil.
-    /// - Note that rawValue is returned with forced unwrapping because
-    /// it is not possible to be returned if nil, so it's safe to return it this way.
     static func answerWithText() -> String {
         var rawValue: String?
         repeat {
@@ -64,8 +63,8 @@ final class UserFunctions {
                 print("❌ You didn't type anything. Please try again")
             }
         } while rawValue == nil
-
-        return rawValue!
+        guard let answer = rawValue else { return ""}
+        return answer
     }
 
     /// This function returns an Int value.
@@ -85,15 +84,13 @@ final class UserFunctions {
                 print("❌ You can only answer with a number")
             }
         } while readValue == nil
-
-        return readValue!
+        guard let intValue = readValue else { return 0 }
+        return intValue
     }
 
     /// This function returns an Double value.
     /// - It is used to interact with a user, who can reply with any Double value after readline()
     /// - Note that readLine() function is repeated while rawValue == nil.
-    /// - Note that rawValue is returned with forced unwrapping because
-    /// it is not possible to be returned if nil, so it's safe to return it this way.
     /// - In repeat while loop, answerWithText() is called first.
     /// - The returned result of answerWithText() is then converted to a Double value in an if let statement.
     static func answerWithDblNumber() -> Double {
@@ -106,8 +103,8 @@ final class UserFunctions {
                 print("❌ You can only answer with a number")
             }
         } while readValue == nil
-
-        return readValue!
+        guard let dblValue = readValue else { return 0.0 }
+        return dblValue
     }
 
 }

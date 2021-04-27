@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		476BF625260964E10058861F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BF624260964E10058861F /* Player.swift */; };
 		866CCAE5260A026200B5E547 /* UserFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866CCAE4260A026200B5E547 /* UserFunctions.swift */; };
-		86A64C552603E08100B3F184 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A64C542603E08100B3F184 /* main.swift */; };
+		86A64C552603E08100B3F184 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A64C542603E08100B3F184 /* Main.swift */; };
 		86A64C5D2603E10D00B3F184 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A64C5C2603E10D00B3F184 /* Character.swift */; };
 		86A64C602603E12900B3F184 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A64C5F2603E12900B3F184 /* Team.swift */; };
 		86A64C632603E15500B3F184 /* Fight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A64C622603E15500B3F184 /* Fight.swift */; };
@@ -33,7 +33,7 @@
 		476BF624260964E10058861F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		866CCAE4260A026200B5E547 /* UserFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFunctions.swift; sourceTree = "<group>"; };
 		86A64C512603E08100B3F184 /* P3WizardBattle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = P3WizardBattle; sourceTree = BUILT_PRODUCTS_DIR; };
-		86A64C542603E08100B3F184 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		86A64C542603E08100B3F184 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		86A64C5C2603E10D00B3F184 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		86A64C5F2603E12900B3F184 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		86A64C622603E15500B3F184 /* Fight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fight.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		86A64C532603E08100B3F184 /* P3WizardBattle */ = {
 			isa = PBXGroup;
 			children = (
-				86A64C542603E08100B3F184 /* main.swift */,
+				86A64C542603E08100B3F184 /* Main.swift */,
 				86A64C7526053B5000B3F184 /* Game.swift */,
 				476BF624260964E10058861F /* Player.swift */,
 				86A64C622603E15500B3F184 /* Fight.swift */,
@@ -164,7 +164,7 @@
 				86A64C632603E15500B3F184 /* Fight.swift in Sources */,
 				86A64C7626053B5000B3F184 /* Game.swift in Sources */,
 				86A64C602603E12900B3F184 /* Team.swift in Sources */,
-				86A64C552603E08100B3F184 /* main.swift in Sources */,
+				86A64C552603E08100B3F184 /* Main.swift in Sources */,
 				476BF625260964E10058861F /* Player.swift in Sources */,
 				86A64C5D2603E10D00B3F184 /* Character.swift in Sources */,
 				866CCAE5260A026200B5E547 /* UserFunctions.swift in Sources */,
